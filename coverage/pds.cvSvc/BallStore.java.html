@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BallStore.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Test Coverage Report of 1325, December 2 2014 for Revision ${revision}</a> &gt; <a href="index.html" class="el_package">pds.cvSvc</a> &gt; <span class="el_source">BallStore.java</span></div><h1>BallStore.java</h1><pre class="source lang-java linenums">package pds.cvSvc;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import org.opencv.core.MatOfPoint;
+import org.opencv.core.RotatedRect;
+
+/**
+ * A data structure for storing the raw contours of moving objects.
+ * @author Chris Guinnup
+ *
+ */
+
+public class BallStore {
+	private ConcurrentSkipListMap&lt;Long, List&lt;RotatedRect&gt;&gt; ballStorage;
+	
+	private AtomicInteger size;
+	private static final int CAPACITY = 60;
+<span class="fc" id="L22">	private static final List&lt;RotatedRect&gt; JOB_SKIPPED = new ArrayList&lt;RotatedRect&gt;(); </span>
+
+	
+	/**
+	 * Initializes the data structures
+	 */
+<span class="fc" id="L28">	public BallStore() {</span>
+<span class="fc" id="L29">		ballStorage = new ConcurrentSkipListMap&lt;Long, List&lt;RotatedRect&gt;&gt;();</span>
+<span class="fc" id="L30">		size = new AtomicInteger(0);</span>
+<span class="fc" id="L31">	}</span>
+	
+	
+	/**
+	 * Add new frame difference value to the store
+	 * @param frameNum The greater frame number of the two frames compared
+	 * @param result Total gated difference
+	 */
+	public void addResult(Long frameNum, List&lt;RotatedRect&gt; result) {
+<span class="nc" id="L40">		ballStorage.put(frameNum, result);</span>
+<span class="nc" id="L41">		trim();</span>
+<span class="nc" id="L42">	}</span>
+	
+	
+	/**
+	 * Inform the store that a particular frame's calculation was skipped
+	 * @param frameNum The greater frame number of the two frames (which would have been) compared
+	 */
+	public void skipJob(Long frameNum) {
+<span class="nc" id="L50">		ballStorage.put(frameNum, JOB_SKIPPED);</span>
+<span class="nc" id="L51">		trim();</span>
+<span class="nc" id="L52">	}</span>
+	
+	
+	/***
+	 * Updates size and removes any over-capacity node (oldest first)
+	 */
+	private void trim() {
+<span class="nc bnc" id="L59" title="All 2 branches missed.">		if (size.getAndIncrement() &gt;= CAPACITY) {</span>
+<span class="nc" id="L60">			ballStorage.pollFirstEntry();</span>
+<span class="nc" id="L61">			size.decrementAndGet();</span>
+		}
+<span class="nc" id="L63">	}</span>
+	
+	
+	/**
+	 * Queries whether a particular frame's calculation was skipped
+	 * @param frameNum The greater frame number of the two frames (which would have been) compared
+	 * @return True if the calculation was skipped, false if the calculation is available
+	 */
+	public boolean wasSkipped(Long frameNum) {
+<span class="nc bnc" id="L72" title="All 2 branches missed.">		return (ballStorage.get(frameNum) == JOB_SKIPPED);</span>
+	}
+	
+	
+	/**
+	 * Gets the summed difference value for a particular frame comparison
+	 * @param frameNum The greater frame number of the two frames compared
+	 * @return The summed difference value
+	 */
+	public List&lt;RotatedRect&gt; getBoundingRectangles(Long frameNum) {
+<span class="nc" id="L82">		return ballStorage.get(frameNum);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.3.20130409-1102</span></div></body></html>

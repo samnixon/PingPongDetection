@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>FrameStore.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Test Coverage Report of 1325, December 2 2014 for Revision ${revision}</a> &gt; <a href="index.html" class="el_package">pds.videoSvc</a> &gt; <span class="el_source">FrameStore.java</span></div><h1>FrameStore.java</h1><pre class="source lang-java linenums">package pds.videoSvc;
+
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+/**
+ * A data structure that acts as the interface between VLCJ and OpenCV.
+ * @author Sam Nixon
+ *
+ */
+public class FrameStore {
+
+	protected long frameNumber;
+	private BlockingQueue&lt;FrameNode&gt; storage;
+<span class="fc" id="L14">	private final int CAPACITY = 5;</span>
+	
+<span class="fc" id="L16">	public FrameStore(int rows, int cols){</span>
+<span class="fc" id="L17">		this.storage = new LinkedBlockingQueue&lt;FrameNode&gt;();</span>
+<span class="fc" id="L18">		this.frameNumber = 0;</span>
+<span class="fc" id="L19">		FrameNode.initDimensions(cols, rows);		</span>
+<span class="fc" id="L20">	}</span>
+	/**
+	 * @return A Queue containing FrameNodes
+	 */
+	public BlockingQueue&lt;FrameNode&gt; getStorage(){
+<span class="nc" id="L25">		return storage;</span>
+	}
+	/**
+	 * @return The oldest frame currently in the Queue
+	 */
+	public FrameNode getFrame(){
+<span class="nc" id="L31">		return storage.poll(); 	</span>
+	}
+	/**
+	 * @return true if the maximum number of FrameNodes allowed is held
+	 */
+	public boolean atCapacity(){
+<span class="fc bfc" id="L37" title="All 2 branches covered.">		return storage.size() &gt;= CAPACITY;</span>
+	}
+	/**
+	 * Creates and adds a new FrameNode to storage. Old FrameNodes are removed
+	 * if the Queue is at capacity
+	 * @param data
+	 * @throws Exception
+	 */
+	public void putFrame(int[] data) throws Exception{
+<span class="fc bfc" id="L46" title="All 2 branches covered.">		if (atCapacity()){</span>
+<span class="fc" id="L47">			storage.poll();</span>
+		}
+<span class="fc" id="L49">		FrameNode frame = new FrameNode(++frameNumber, data);</span>
+<span class="fc" id="L50">		storage.offer(frame);</span>
+<span class="fc" id="L51">	}</span>
+	/**
+	 * @return Number of elements in the Queue
+	 */
+	public int getSize(){
+<span class="fc" id="L56">		return storage.size();</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.3.20130409-1102</span></div></body></html>

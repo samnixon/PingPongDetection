@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>StatusStores.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Test Coverage Report of 1325, December 2 2014 for Revision ${revision}</a> &gt; <a href="index.html" class="el_package">pds.sitAnalyze</a> &gt; <span class="el_source">StatusStores.java</span></div><h1>StatusStores.java</h1><pre class="source lang-java linenums">package pds.sitAnalyze;
+
+/**
+ * A struct-like container for the *Status output stores
+ * @author Chris Guinnup
+ */
+public class StatusStores {
+
+	public ImmediateStore immedStore;
+	public AggregateStore aggStore;
+	
+<span class="fc" id="L12">	public StatusStores() {</span>
+<span class="fc" id="L13">		immedStore = new ImmediateStore();</span>
+<span class="fc" id="L14">		aggStore = new AggregateStore();</span>
+<span class="fc" id="L15">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.3.20130409-1102</span></div></body></html>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ConsoleInput.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Test Coverage Report of 1325, December 2 2014 for Revision ${revision}</a> &gt; <a href="index.html" class="el_package">pds.input</a> &gt; <span class="el_source">ConsoleInput.java</span></div><h1>ConsoleInput.java</h1><pre class="source lang-java linenums">package pds.input;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+/**
+ * This class starts the run thread, and handles
+ * input from the user for termination of the program.
+ * @author Bryan Schmier
+ */
+public class ConsoleInput extends Thread{
+	protected AtomicBoolean runStatus;
+
+	/**
+	 * Sets the the atomic boolean runStatus.
+	 * @param runStatus
+	 */
+<span class="fc" id="L20">	public ConsoleInput(AtomicBoolean runStatus) {</span>
+<span class="fc" id="L21">		this.runStatus = runStatus;</span>
+<span class="fc" id="L22">	}</span>
+
+	/**
+	 * Returns a boolean of the current runStatus.
+	 * @return
+	 */
+	public boolean noQuitCommand() {
+<span class="fc" id="L29">		return runStatus.get();</span>
+	}
+
+	/**Launch single thread which checks for user input 
+	 * and changes runStatus upon quit command.
+	 */
+	public void run(){
+<span class="fc" id="L36">		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));</span>
+
+		String userInput;
+
+<span class="fc bfc" id="L40" title="All 2 branches covered.">		while(runStatus.get() == true){ //while runStatus = true</span>
+			try {
+<span class="fc" id="L42">				userInput = reader.readLine();</span>
+<span class="nc" id="L43">			} catch (IOException e1) {</span>
+				// TODO Auto-generated catch block
+<span class="nc" id="L45">				e1.printStackTrace();</span>
+<span class="nc" id="L46">				break;</span>
+<span class="fc" id="L47">			}</span>
+
+<span class="fc bfc" id="L49" title="All 2 branches covered.">			if (userInput.equals(&quot;quit&quot;)){</span>
+<span class="fc" id="L50">				runStatus.set(false); //terminates application</span>
+			}
+<span class="pc bpc" id="L52" title="1 of 4 branches missed.">			if (!(userInput.equals(&quot;quit&quot;) || userInput == null)){</span>
+				//if not &quot;quit&quot;, output &quot;Type 'quit' to close the application&quot;
+<span class="fc" id="L54">				System.out.println(&quot;Type 'quit' to close the application.&quot;);</span>
+<span class="fc" id="L55">				try{Thread.sleep(1000);} //pause for 1 second</span>
+<span class="pc" id="L56">				catch(Exception e){}</span>
+			}
+		}
+<span class="fc" id="L59">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.3.20130409-1102</span></div></body></html>

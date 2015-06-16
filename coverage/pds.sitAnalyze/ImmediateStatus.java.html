@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ImmediateStatus.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Test Coverage Report of 1325, December 2 2014 for Revision ${revision}</a> &gt; <a href="index.html" class="el_package">pds.sitAnalyze</a> &gt; <span class="el_source">ImmediateStatus.java</span></div><h1>ImmediateStatus.java</h1><pre class="source lang-java linenums">package pds.sitAnalyze;
+
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import org.opencv.core.MatOfPoint2f;
+import org.opencv.core.Point;
+import org.opencv.core.RotatedRect;
+import org.opencv.imgproc.Imgproc;
+
+import pds.cvSvc.BallStore;
+import pds.cvSvc.CVStores;
+import pds.cvSvc.DiffStore;
+import pds.cvSvc.TableStore;
+
+/**
+ * Converts the raw data from frame analysis and frame comparisons
+ * into estimated probabilities that certain events are occuring.
+ * @author Chris Guinnup
+ *
+ */
+public class ImmediateStatus implements Runnable{
+	/* Output */
+	StatusStores statusStores;
+	/* Input */
+	CVStores cvStores;
+	long frameNum; // max of any 2 compared
+	
+	
+	/**
+	 * Initializes the thread with all necessary references
+	 */
+<span class="nc" id="L35">	public ImmediateStatus(long frameNum, CVStores cvStores, StatusStores statusStores) {</span>
+<span class="nc" id="L36">		this.frameNum = frameNum;</span>
+<span class="nc" id="L37">		this.statusStores = statusStores;</span>
+<span class="nc" id="L38">		this.cvStores = cvStores;</span>
+<span class="nc" id="L39">	}</span>
+	
+	
+	/**
+	 * Performs immediate probability assignment for just-analyzed frames
+	 */
+	public void run() {
+		// analyze cvStores for probabilities of each event
+
+<span class="nc" id="L48">		ImmediateNode probs = new ImmediateNode();</span>
+<span class="nc" id="L49">		probs.frameNum = frameNum;</span>
+<span class="nc" id="L50">		probs.probDiffMotion = analyzeDiffs(cvStores.diffStore);</span>
+<span class="nc" id="L51">		probs.probTable = analyzeTable(cvStores.tableStore);</span>
+<span class="nc" id="L52">		probs.potentialBallPoints = getPotentialBallPoints(cvStores.ballStore);</span>
+		
+		// sanity check
+		/*if(frameNum%30 == 0)
+			System.out.println(&quot;Frame &quot; + frameNum + &quot; Prob Table: &quot; + probs.probTable);*/
+		
+<span class="nc" id="L58">		statusStores.immedStore.addResult(frameNum, probs);</span>
+	
+		// run an AggregateStatus analysis 
+<span class="nc" id="L61">		AggregateStatus agg = new AggregateStatus(frameNum, cvStores, statusStores);</span>
+<span class="nc" id="L62">		agg.parseImmedStatus();</span>
+<span class="nc" id="L63">	}</span>
+	
+	
+	/**
+	 * Determines the center locations of potential ball points from the last frame comparison
+	 * @param ballStore The calculated bounding rectangles on moving ball-like objects
+	 * @return A list of the center points for all potential ball-objects
+	 */
+	private List&lt;Point&gt; getPotentialBallPoints(BallStore ballStore) {
+<span class="nc" id="L72">		ArrayList&lt;Point&gt; potentialBallCenters = new ArrayList&lt;Point&gt;();</span>
+<span class="nc" id="L73">		List&lt;RotatedRect&gt; boundingRectangles = ballStore.getBoundingRectangles(frameNum);</span>
+		
+<span class="nc bnc" id="L75" title="All 2 branches missed.">		if (boundingRectangles != null) {</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">			for (RotatedRect r : boundingRectangles) {</span>
+<span class="nc" id="L77">				potentialBallCenters.add(r.center);</span>
+				//sanity check
+				//System.out.println(&quot;Frame: &quot; + frameNum + &quot; Point: &quot; + r.center);
+<span class="nc" id="L80">			}</span>
+		}
+<span class="nc" id="L82">		return potentialBallCenters;</span>
+	}
+	
+	
+	/**
+	 * Attempts to assign a probability to detected motion being a game in progress.
+	 * High degree of motion is regarded as a sign that the table may not be in view,
+	 * thus is assigned a lower probability.
+	 * @param diffStore The calculated frame differences
+	 * @return Probability ranging from 1.0 to 0.0
+	 */
+	private double analyzeDiffs(DiffStore diffStore) {
+
+<span class="nc bnc" id="L95" title="All 2 branches missed.">		if (diffStore.wasSkipped(frameNum) == false) {</span>
+<span class="nc" id="L96">			double weightedDiff = diffStore.getDifference(frameNum);</span>
+			
+<span class="nc" id="L98">			final double LOWER_BOUND = 1234;</span>
+<span class="nc" id="L99">			final double UPPER_BOUND = 1234567;</span>
+			
+<span class="nc bnc" id="L101" title="All 2 branches missed.">			if (weightedDiff &lt;= LOWER_BOUND)</span>
+<span class="nc" id="L102">				return weightedDiff / LOWER_BOUND;</span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">			if (weightedDiff &lt;= UPPER_BOUND)</span>
+<span class="nc" id="L104">				return 1.0;</span>
+			else // if (weightedDiff &gt; UPPER_BOUND)
+<span class="nc" id="L106">				return 1.0 - Math.log( (Math.E-1)*((weightedDiff-UPPER_BOUND)/weightedDiff)+1 ); </span>
+				// formula keeps value between 1.0 and 0.0
+		}
+		else 
+<span class="nc" id="L110">			return 0.0;</span>
+	}
+	
+	
+	/**
+	 * Determines bounding rectangle for the table
+	 */
+	private RotatedRect whereIsTable(TableStore tableStore) {
+<span class="nc" id="L118">		RotatedRect boundingRectangle = null;</span>
+		List&lt;RotatedRect&gt; parallelRects;
+		
+		//TODO
+		//parallelRects = findParallelRectangles( getRectangles( tableStore.getTableResults(frameNum)));
+		
+		
+<span class="nc" id="L125">		return boundingRectangle;</span>
+	}
+	
+	
+	/**
+	 * Calculates binary probability for &quot;is table present?&quot;
+	 */
+	private double analyzeTable(TableStore tableStore) {
+<span class="nc bnc" id="L133" title="All 2 branches missed.">		if (findParallelRectangles( getRectangles( </span>
+				tableStore.getTableResults(frameNum))) )
+<span class="nc" id="L135">			return 1.0;</span>
+		else
+<span class="nc" id="L137">			return 0.0;</span>
+	}
+	
+	
+	/**
+	 * Determines whether the input contains two Rectangles that are parallel
+	 * @author Sam Nixon
+	 */
+	private boolean findParallelRectangles(ArrayList&lt;RotatedRect&gt; input) {
+<span class="nc bnc" id="L146" title="All 2 branches missed.">		if (input != null) {</span>
+<span class="nc" id="L147">			List&lt;RotatedRect&gt; rectangles = new ArrayList&lt;RotatedRect&gt;();</span>
+			
+<span class="nc bnc" id="L149" title="All 2 branches missed.">			for (int i = 0; i &lt; input.size(); i++){</span>
+<span class="nc bnc" id="L150" title="All 2 branches missed.">				for(int j = 0; j &lt; i; j++){</span>
+<span class="nc" id="L151">					RotatedRect rectangle1 = input.get(i);</span>
+<span class="nc" id="L152">					RotatedRect rectangle2 = input.get(j);</span>
+<span class="nc" id="L153">					double difference = Math.abs(rectangle1.angle-rectangle2.angle);</span>
+<span class="nc bnc" id="L154" title="All 2 branches missed.">					if(difference &lt; 3) {</span>
+<span class="nc" id="L155">						return true;</span>
+					}
+				}
+			}
+		}
+<span class="nc" id="L160">		return false;</span>
+	}
+	
+	
+	/**
+	 * Returns a collection containing the rectangles that bound the input contours
+	 * @author Sam Nixon
+	 */
+	private ArrayList&lt;RotatedRect&gt; getRectangles(ArrayList&lt;MatOfPoint2f&gt; input){
+<span class="nc" id="L169">		ArrayList&lt;RotatedRect&gt; result = new ArrayList&lt;RotatedRect&gt;();</span>
+<span class="nc" id="L170">		Iterator&lt;MatOfPoint2f&gt; i = input.iterator();</span>
+<span class="nc bnc" id="L171" title="All 2 branches missed.">		while (i.hasNext()){</span>
+<span class="nc" id="L172">			result.add(Imgproc.minAreaRect(i.next()));</span>
+		}
+<span class="nc" id="L174">		return result;</span>
+	}
+	
+	
+	//TODO: analyze other factors
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.3.20130409-1102</span></div></body></html>

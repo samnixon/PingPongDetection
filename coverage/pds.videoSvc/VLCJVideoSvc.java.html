@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>VLCJVideoSvc.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Test Coverage Report of 1325, December 2 2014 for Revision ${revision}</a> &gt; <a href="index.html" class="el_package">pds.videoSvc</a> &gt; <span class="el_source">VLCJVideoSvc.java</span></div><h1>VLCJVideoSvc.java</h1><pre class="source lang-java linenums">package pds.videoSvc;
+
+import java.io.FileNotFoundException;
+import java.lang.reflect.InvocationTargetException;
+
+/**
+ *Uses VLCHooks to open a media file and store frame data in a FrameStore
+ * @author Sam Nixon
+ *
+ */
+public class VLCJVideoSvc implements VideoSvcIF {
+	private VLCHooks vlcj;
+	private FrameStore storage;
+
+	public static VideoSvcIF createVideoSvc(String[] args) {
+<span class="pc bpc" id="L16" title="1 of 2 branches missed.">		if (args.length &gt;= 1){</span>
+<span class="fc" id="L17">			VideoSvcIF result = new VLCJVideoSvc(args);</span>
+<span class="fc" id="L18">			return result;</span>
+		}
+		else{
+<span class="nc" id="L21">			return null;</span>
+		}
+	}
+
+<span class="fc" id="L25">	private VLCJVideoSvc(String[] args){</span>
+		try {
+<span class="nc" id="L27">			this.vlcj = new VLCHooks(args[0],args);</span>
+<span class="nc" id="L28">			this.storage = this.vlcj.getStorage();</span>
+<span class="fc" id="L29">		} catch (InvocationTargetException | InterruptedException e) {</span>
+<span class="fc" id="L30">			e.printStackTrace();</span>
+<span class="nc" id="L31">		}</span>
+<span class="fc" id="L32">	}</span>
+
+
+	@Override
+	public void startVideoSvc() throws FileNotFoundException {
+<span class="nc" id="L37">		vlcj.start();</span>
+<span class="nc" id="L38">	}</span>
+	/**
+	 * Returns the FrameStore with the video's individual frames
+	 */
+	@Override
+	public FrameStore getStorage() {
+<span class="fc" id="L44">		return storage;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.3.20130409-1102</span></div></body></html>

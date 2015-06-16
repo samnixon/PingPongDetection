@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AggregateStatus.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Test Coverage Report of 1325, December 2 2014 for Revision ${revision}</a> &gt; <a href="index.html" class="el_package">pds.sitAnalyze</a> &gt; <span class="el_source">AggregateStatus.java</span></div><h1>AggregateStatus.java</h1><pre class="source lang-java linenums">package pds.sitAnalyze;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.opencv.core.Point;
+
+import pds.PDSMain;
+import pds.cvSvc.CVStores;
+import pds.cvSvc.MatDisplay;
+import pds.output.ConsoleOutput;
+import pds.sitAnalyze.AggregateStore.GameStatus;
+import pds.videoSvc.FrameNode;
+
+/**
+ * Performs final calculations determining the game status, 
+ * smoothing the result by averaging several immediate frame comparisons. 
+ * @author Chris Guinnup
+ *
+ */
+public class AggregateStatus{	
+	/* Output */
+	AggregateStore aggStore;
+	/* Input */
+	ImmediateStore immedStore;
+	CVStores cvStores;
+	long frameNum; // max of any 2 compared
+<span class="fc" id="L30">	private static ConsoleOutput out = null;</span>
+	
+	//for testing &amp; debugging
+<span class="fc" id="L33">	private static long[] lastFramePrinted = {-999, -999};</span>
+<span class="fc" id="L34">	private static double aggregateBest = 0.0;</span>
+	
+	
+	/* Constants */
+	protected static final int SMOOTHING_FACTOR = 30;  // Consecutive frames needed to declare a new status.
+	protected static final int BALL_MAX_EXPLORE = 7;  // Must be &lt;= SMOOTHING_FACTOR.  How many frames to explore to find actual balls.
+	protected static final int IN_USE_INACTIVITY_BUFFER = 20*30;  // How many frames (30 fps) of inactivity can occur 
+																// while we still consider the game in-progress. 
+	protected static final int REPRINT_STATUS_INTERVAL = 30*30;   // Interval between reprinting the same status (30fps).
+	
+	
+	/**
+	 * Initializes the thread with all necessary references
+	 */
+<span class="fc" id="L48">	public AggregateStatus(long frameNum, CVStores cvStores, StatusStores statusStores) {</span>
+<span class="fc" id="L49">		this.frameNum = frameNum;</span>
+<span class="fc" id="L50">		this.cvStores = cvStores;</span>
+<span class="fc" id="L51">		this.immedStore = statusStores.immedStore;</span>
+<span class="fc" id="L52">		this.aggStore = statusStores.aggStore;</span>
+<span class="fc" id="L53">	}</span>
+	
+	
+	/**
+	 * Takes a ConsoleOutput reference so that this class may call it.
+	 * @return False if already initialized
+	 */
+	public static boolean initConsoleOutput(ConsoleOutput outArg) {
+<span class="fc bfc" id="L61" title="All 2 branches covered.">		if (out == null) {</span>
+<span class="fc" id="L62">			out = outArg;</span>
+<span class="fc" id="L63">			return true;</span>
+		}
+		else {
+<span class="fc" id="L66">			return false;</span>
+		}
+	}
+	
+	
+	/**
+	 * Calculates the status of the game, collating and smoothing the immediate comparisons.
+	 */
+	protected void parseImmedStatus(){
+		//TODO: this function
+<span class="nc" id="L76">		double sumDiffProb = 0;</span>
+<span class="nc" id="L77">		double sumTableProb = 0;</span>
+		
+<span class="nc" id="L79">		ImmediateNode [] statuses = immedStore.getMultipleProbs(SMOOTHING_FACTOR);</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">		if (statuses != null) {</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">			for (int i=0; i&lt;SMOOTHING_FACTOR; i++) {</span>
+<span class="nc" id="L82">				sumDiffProb += statuses[i].probDiffMotion;</span>
+<span class="nc" id="L83">				sumTableProb += statuses[i].probTable;</span>
+			}
+			
+			// sanity check
+			/*if (frameNum % 30 == 0) {
+				System.out.println(&quot;(Frames &quot; + (frameNum-SMOOTHING_FACTOR+1) + &quot;-&quot; + frameNum 
+						+ &quot;) Avg Table Probs: &quot;	+ (sumTableProb/SMOOTHING_FACTOR));
+			}*/
+<span class="nc bnc" id="L91" title="All 2 branches missed.">			if (frameNum - lastFramePrinted[0] &gt;= 30) {</span>
+<span class="nc" id="L92">				lastFramePrinted[0] = frameNum;</span>
+<span class="nc" id="L93">				PDSMain.displayStrings[0] = &quot;Frames &quot; + frameNum + &quot; to &quot; + (frameNum+1-SMOOTHING_FACTOR);</span>
+<span class="nc" id="L94">				PDSMain.displayStrings[1] = &quot;Table Prob (Avg)&quot;;</span>
+<span class="nc" id="L95">				PDSMain.displayStrings[2] = &quot;[&quot; + repeat(&quot;*&quot;, (sumTableProb/SMOOTHING_FACTOR)*20) </span>
+						+ repeat(&quot; &quot;, 20*(1.0 - sumTableProb/SMOOTHING_FACTOR)) + &quot;] &quot; + repeat(&quot;NO TABLE DETECTED!&quot;, 1-sumTableProb/SMOOTHING_FACTOR);
+<span class="nc" id="L97">				PDSMain.statisticWindow.showText(PDSMain.displayStrings);</span>
+			}
+			
+<span class="nc bnc" id="L100" title="All 2 branches missed.">			if (sumTableProb/SMOOTHING_FACTOR &lt; 0.5) {</span>
+<span class="nc" id="L101">				update(GameStatus.NoTable);</span>
+			}
+			else {
+<span class="nc bnc" id="L104" title="All 2 branches missed.">				if (potentialBallDetected(statuses)) {</span>
+<span class="nc" id="L105">					aggStore.setPotentialBallEvent(frameNum);</span>
+				}
+				
+<span class="nc bnc" id="L108" title="All 2 branches missed.">				if (/*sumDiffProb/SMOOTHING_FACTOR*/ movingBallDetected(statuses) &gt;= 0.5) {</span>
+<span class="nc" id="L109">					update(GameStatus.InUse);</span>
+				}
+<span class="nc bnc" id="L111" title="All 2 branches missed.">				else if (frameNum - aggStore.getStatusFrameNum(GameStatus.InUse) &gt; IN_USE_INACTIVITY_BUFFER) {</span>
+<span class="nc" id="L112">					update(GameStatus.Free);</span>
+				}
+			}
+		}
+<span class="nc" id="L116">	}</span>
+	
+	/**
+	 * Checks if BallDetect has detected any ball candidates in the most recent frame
+	 */
+	protected boolean potentialBallDetected(ImmediateNode [] statuses) {
+<span class="nc bnc" id="L122" title="All 2 branches missed.">		if (statuses[SMOOTHING_FACTOR-1].potentialBallPoints.size() &gt; 0) {</span>
+<span class="nc" id="L123">			return true;</span>
+		}
+		else {
+<span class="nc" id="L126">			return false;</span>
+		}
+	}
+	
+	
+<span class="pc" id="L131">	enum BallCandidate {</span>
+<span class="fc" id="L132">		ONE, TWO, THREE;</span>
+	}
+
+	static final double FIT_DISTANCE_THRESHOLD = 0.9;
+	static final double FIT_MAX_DEVIANCE = 0.2; // Deviation from predicted line at which the fit probability
+												// is assigned 0, expressed in proportion of the line's length.
+//	static final double FIT_INFLUENCE = 0.5;
+//	static final double DISTANCE_INFLUENCE = 0.5; 
+	static final double DISTANCE_THRESHOLD = 0.018; // Distance to qualify for full distance probability
+												    // expressed as multiple of y-axis screen-length per frame.
+	
+	/**
+	 * Attempts to detect balls moving in a linear-like path
+	 * @param statuses The data from ImmediateStatus processing
+	 * @return Double representing the probability that a ball was detected
+	 */
+	double movingBallDetected(ImmediateNode [] statuses) {
+		double linearFitDeviation;
+<span class="fc" id="L150">		double linearFit = 0.0; // set to 1.0 if perfect line found in 3+ frames</span>
+<span class="fc" id="L151">		double distance = 0.0;</span>
+<span class="fc" id="L152">		double bestFitAndDistance = 0.0;</span>
+		//debugging vars
+<span class="fc" id="L154">		double bestLinearFit = 0.0;</span>
+<span class="fc" id="L155">		double bestDistanceMeasure = 0.0;</span>
+		//end debugging vars
+<span class="fc" id="L157">		int a=0, b=0, c=0; // array positions of our current 3 ball candidates</span>
+<span class="fc" id="L158">		int screenX = FrameNode.getCols()/2;</span>
+<span class="fc" id="L159">		int screenY = FrameNode.getRows()/2;</span>
+<span class="fc" id="L160">		Map&lt;BallCandidate, Point&gt; threeToTry = new HashMap&lt;BallCandidate, Point&gt;();</span>
+<span class="fc" id="L161">		Map&lt;BallCandidate, List&lt;Point&gt;&gt; remainingPoints = new HashMap&lt;BallCandidate, List&lt;Point&gt;&gt;();</span>
+<span class="fc" id="L162">		boolean newTripletFound = false;</span>
+		
+		// select three potential ball points
+<span class="pc bpc" id="L165" title="1 of 4 branches missed.">		for (a = SMOOTHING_FACTOR-1; a &gt;= SMOOTHING_FACTOR-BALL_MAX_EXPLORE &amp;&amp; !newTripletFound; a--) {</span>
+<span class="fc bfc" id="L166" title="All 2 branches covered.">			if (statuses[a].potentialBallPoints.size() &gt; 0) {</span>
+<span class="fc" id="L167">				remainingPoints.put(BallCandidate.ONE, deepCopy(statuses[a].potentialBallPoints));</span>
+<span class="fc" id="L168">				threeToTry.put(BallCandidate.ONE, statuses[a].potentialBallPoints.get(0));</span>
+<span class="fc" id="L169">				remainingPoints.get(BallCandidate.ONE).remove(0);</span>
+<span class="pc bpc" id="L170" title="1 of 4 branches missed.">				for (b = a-1; b &gt;= SMOOTHING_FACTOR-BALL_MAX_EXPLORE &amp;&amp; !newTripletFound; b--) {</span>
+<span class="fc bfc" id="L171" title="All 2 branches covered.">					if (statuses[b].potentialBallPoints.size() &gt; 0) {</span>
+<span class="fc" id="L172">						remainingPoints.put(BallCandidate.TWO, deepCopy(statuses[b].potentialBallPoints));</span>
+<span class="fc" id="L173">						threeToTry.put(BallCandidate.TWO, statuses[b].potentialBallPoints.get(0));</span>
+<span class="fc" id="L174">						remainingPoints.get(BallCandidate.TWO).remove(0);</span>
+<span class="pc bpc" id="L175" title="1 of 4 branches missed.">						for (c = b-1; c &gt;= SMOOTHING_FACTOR-BALL_MAX_EXPLORE &amp;&amp; !newTripletFound; c--) {</span>
+<span class="fc bfc" id="L176" title="All 2 branches covered.">							if (statuses[c].potentialBallPoints.size() &gt; 0) {</span>
+<span class="fc" id="L177">								remainingPoints.put(BallCandidate.THREE, deepCopy(statuses[c].potentialBallPoints));</span>
+<span class="fc" id="L178">								threeToTry.put(BallCandidate.THREE, statuses[c].potentialBallPoints.get(0));</span>
+<span class="fc" id="L179">								remainingPoints.get(BallCandidate.THREE).remove(0);</span>
+<span class="fc" id="L180">								newTripletFound = true;</span>
+							}
+						}	
+					}
+				}	
+			}
+		}
+		
+<span class="fc" id="L188">		a++; // decremented one time too many</span>
+<span class="fc" id="L189">		b++;</span>
+<span class="fc" id="L190">		c++;</span>
+		
+		// evaluate line fit and distance of the three points
+<span class="pc bpc" id="L193" title="1 of 2 branches missed.">		while (bestFitAndDistance &lt; FIT_DISTANCE_THRESHOLD ) {	</span>
+			// no more 3-point sets found so exit and return best	
+<span class="fc bfc" id="L195" title="All 2 branches covered.">			if (!newTripletFound) {</span>
+<span class="fc" id="L196">				break;</span>
+			}
+			
+			// make sure points' x, y coordinates are consistently ordered
+<span class="fc bfc" id="L200" title="All 2 branches covered.">			if (areOrdered(threeToTry)) {</span>
+				// see how good of a line fit these three points make:
+				// draw line between potential ball points 1 &amp; 3, then see how close point 2 is to predicted line
+				// (this should be quicker than calculating regression fit)
+<span class="fc" id="L204">				double deltaX = threeToTry.get(BallCandidate.ONE).x - threeToTry.get(BallCandidate.THREE).x;</span>
+<span class="fc" id="L205">				double deltaY = threeToTry.get(BallCandidate.ONE).y - threeToTry.get(BallCandidate.THREE).y;</span>
+<span class="fc" id="L206">				double slope = deltaY / deltaX;</span>
+<span class="fc" id="L207">				double intercept = -1*slope*threeToTry.get(BallCandidate.ONE).x + threeToTry.get(BallCandidate.ONE).y;</span>
+<span class="fc" id="L208">				distance = Math.sqrt(Math.pow(deltaY, 2) + Math.pow(deltaY, 2));</span>
+				
+				// normalize the line-predicted nearness by the distance of the line
+<span class="fc" id="L211">				linearFitDeviation = Math.abs( (slope*threeToTry.get(BallCandidate.TWO).x </span>
+						+ intercept - threeToTry.get(BallCandidate.TWO).y) / distance );
+				
+<span class="fc bfc" id="L214" title="All 2 branches covered.">				if (linearFitDeviation &lt;= FIT_MAX_DEVIANCE) {</span>
+<span class="fc" id="L215">					linearFit = Math.abs(linearFitDeviation-FIT_MAX_DEVIANCE)/FIT_MAX_DEVIANCE;</span>
+				}
+				else {
+<span class="fc" id="L218">					linearFit = 0.0;</span>
+				}
+				
+				// check the distance between the points
+				// normalize distance: by the spanning number of frames
+<span class="fc" id="L223">				double adjustedDistance = distance / (double)(statuses[a].frameNum - statuses[c].frameNum);</span>
+				// normalize distance: by the width of the frame
+<span class="fc" id="L225">				adjustedDistance = adjustedDistance / ((double)(screenX+screenY)/2.0);</span>
+<span class="fc" id="L226">				double distanceMeasure = Math.min(1.0, adjustedDistance/DISTANCE_THRESHOLD);</span>
+							
+				// calculate distance &amp; fit goodness
+<span class="fc" id="L229">				double currentFitAndDistance = linearFit * distanceMeasure;</span>
+				
+				//sanity check
+				//System.out.println(&quot;Frame &quot; + frameNum + &quot; currentFitAndDistance = &quot; + currentFitAndDistance);
+				
+				// if good enough, break loop &amp; return value
+<span class="fc bfc" id="L235" title="All 2 branches covered.">				if (currentFitAndDistance &gt;= FIT_DISTANCE_THRESHOLD) {</span>
+<span class="fc" id="L236">					break;</span>
+				}
+				
+				// compare to best distance-fit goodness so far &amp; replace if better
+<span class="fc bfc" id="L240" title="All 2 branches covered.">				if (currentFitAndDistance &gt; bestFitAndDistance) {</span>
+<span class="fc" id="L241">					bestFitAndDistance = currentFitAndDistance;</span>
+					//debug:
+<span class="fc" id="L243">					bestLinearFit = linearFit;</span>
+<span class="fc" id="L244">					bestDistanceMeasure = distanceMeasure;</span>
+				}
+			}
+			
+			// now find new set of three ball candidates
+			
+<span class="fc" id="L250">			newTripletFound = false;</span>
+			// first check if any additional ball candidates are in current frames
+<span class="fc bfc" id="L252" title="All 2 branches covered.">			for (BallCandidate n: BallCandidate.values()) {</span>
+<span class="fc bfc" id="L253" title="All 2 branches covered.">				if (remainingPoints.get(n).size() &gt; 0) {</span>
+<span class="fc" id="L254">					threeToTry.put(n, remainingPoints.get(n).get(0));</span>
+<span class="fc" id="L255">					remainingPoints.get(n).remove(0);</span>
+<span class="fc" id="L256">					newTripletFound = true;</span>
+<span class="fc" id="L257">					break;</span>
+				}
+			}
+
+			// then try moving ball candidate c's frame
+<span class="fc bfc" id="L262" title="All 2 branches covered.">			if (!newTripletFound) {</span>
+<span class="pc bpc" id="L263" title="1 of 4 branches missed.">				for (--c; c &gt;= SMOOTHING_FACTOR-BALL_MAX_EXPLORE &amp;&amp; !newTripletFound; c--) {</span>
+<span class="pc bpc" id="L264" title="1 of 2 branches missed.">					if (statuses[c].potentialBallPoints.size() &gt; 0) {</span>
+<span class="nc" id="L265">						remainingPoints.put(BallCandidate.THREE, deepCopy(statuses[c].potentialBallPoints));</span>
+<span class="nc" id="L266">						threeToTry.put(BallCandidate.THREE, statuses[c].potentialBallPoints.get(0));</span>
+<span class="nc" id="L267">						remainingPoints.get(BallCandidate.THREE).remove(0);</span>
+<span class="nc" id="L268">						newTripletFound = true;</span>
+<span class="nc" id="L269">						c++;</span>
+					}
+				}	
+			}
+			
+			// then try moving ball candidate b's frame (and resetting c)
+<span class="fc bfc" id="L275" title="All 2 branches covered.">			if (!newTripletFound) {</span>
+<span class="pc bpc" id="L276" title="1 of 4 branches missed.">				for (--b; b &gt;= SMOOTHING_FACTOR-BALL_MAX_EXPLORE &amp;&amp; !newTripletFound; b--) {</span>
+<span class="fc bfc" id="L277" title="All 2 branches covered.">					if (statuses[b].potentialBallPoints.size() &gt; 0) {</span>
+<span class="fc" id="L278">						remainingPoints.put(BallCandidate.TWO, deepCopy(statuses[b].potentialBallPoints));</span>
+<span class="fc" id="L279">						threeToTry.put(BallCandidate.TWO, statuses[b].potentialBallPoints.get(0));</span>
+<span class="fc" id="L280">						remainingPoints.get(BallCandidate.TWO).remove(0);</span>
+<span class="pc bpc" id="L281" title="1 of 4 branches missed.">						for (c = b-1; c &gt;= SMOOTHING_FACTOR-BALL_MAX_EXPLORE &amp;&amp; !newTripletFound; c--) {</span>
+<span class="pc bpc" id="L282" title="1 of 2 branches missed.">							if (statuses[c].potentialBallPoints.size() &gt; 0) {</span>
+<span class="nc" id="L283">								remainingPoints.put(BallCandidate.THREE, deepCopy(statuses[c].potentialBallPoints));</span>
+<span class="nc" id="L284">								threeToTry.put(BallCandidate.THREE, statuses[c].potentialBallPoints.get(0));</span>
+<span class="nc" id="L285">								remainingPoints.get(BallCandidate.THREE).remove(0);</span>
+<span class="nc" id="L286">								newTripletFound = true;</span>
+<span class="nc" id="L287">								c++; b++;</span>
+							}
+						}	
+					}
+				}	
+			}
+			
+			// then try moving ball candidate a's frame (and resetting b &amp; c)
+<span class="fc bfc" id="L295" title="All 2 branches covered.">			if (!newTripletFound) {</span>
+<span class="pc bpc" id="L296" title="1 of 4 branches missed.">				for (--a; a &gt;= SMOOTHING_FACTOR-BALL_MAX_EXPLORE &amp;&amp; !newTripletFound; a--) {</span>
+<span class="fc bfc" id="L297" title="All 2 branches covered.">					if (statuses[a].potentialBallPoints.size() &gt; 0) {</span>
+<span class="fc" id="L298">						remainingPoints.put(BallCandidate.ONE, deepCopy(statuses[a].potentialBallPoints));</span>
+<span class="fc" id="L299">						threeToTry.put(BallCandidate.ONE, statuses[a].potentialBallPoints.get(0));</span>
+<span class="fc" id="L300">						remainingPoints.get(BallCandidate.ONE).remove(0);</span>
+<span class="pc bpc" id="L301" title="1 of 4 branches missed.">						for (b = a-1; b &gt;= SMOOTHING_FACTOR-BALL_MAX_EXPLORE &amp;&amp; !newTripletFound; b--) {</span>
+<span class="fc bfc" id="L302" title="All 2 branches covered.">							if (statuses[b].potentialBallPoints.size() &gt; 0) {</span>
+<span class="fc" id="L303">								remainingPoints.put(BallCandidate.TWO, deepCopy(statuses[b].potentialBallPoints));</span>
+<span class="fc" id="L304">								threeToTry.put(BallCandidate.TWO, statuses[b].potentialBallPoints.get(0));</span>
+<span class="fc" id="L305">								remainingPoints.get(BallCandidate.TWO).remove(0);</span>
+<span class="pc bpc" id="L306" title="1 of 4 branches missed.">								for (c = b-1; c &gt;= SMOOTHING_FACTOR-BALL_MAX_EXPLORE &amp;&amp; !newTripletFound; c--) {</span>
+<span class="pc bpc" id="L307" title="1 of 2 branches missed.">									if (statuses[c].potentialBallPoints.size() &gt; 0) {</span>
+<span class="nc" id="L308">										remainingPoints.put(BallCandidate.THREE, deepCopy(statuses[c].potentialBallPoints));</span>
+<span class="nc" id="L309">										threeToTry.put(BallCandidate.THREE, statuses[c].potentialBallPoints.get(0));</span>
+<span class="nc" id="L310">										remainingPoints.get(BallCandidate.THREE).remove(0);</span>
+<span class="nc" id="L311">										newTripletFound = true;</span>
+<span class="nc" id="L312">										c++; b++; a++;</span>
+									}
+								}	
+							}
+						}	
+					}
+				}
+			}
+			// restart primary function loop
+		}
+		
+		//sanity check
+		/*if (bestLinearFit &gt;= 0.5 || bestDistanceMeasure &gt;= 0.5) {
+			System.out.println(&quot;(Frame &quot; + frameNum + &quot;) Prob. moving ball = &quot; + bestFitAndDistance 
+					+ &quot; [fit &quot;+ bestLinearFit + &quot;  dist &quot;+ bestDistanceMeasure + &quot;]&quot;);
+		}*/
+<span class="fc bfc" id="L328" title="All 4 branches covered.">		if (frameNum - lastFramePrinted[1] &gt;= 30 || bestFitAndDistance &gt; aggregateBest) {</span>
+<span class="nc" id="L329">			lastFramePrinted[1] = frameNum;</span>
+<span class="nc" id="L330">			aggregateBest = bestFitAndDistance;</span>
+			
+<span class="nc" id="L332">	 		PDSMain.displayStrings[4] = &quot;Frame &quot; + frameNum;</span>
+<span class="nc" id="L333">	 		PDSMain.displayStrings[5] = &quot;Ball Prob&quot;;</span>
+<span class="nc" id="L334">	 		PDSMain.displayStrings[6] = &quot;[&quot; + repeat(&quot;*&quot;, 20*bestFitAndDistance) </span>
+					+ repeat(&quot; &quot;, 20*(1 -bestFitAndDistance)) + &quot;] &quot; + repeat(&quot;Ball detected&quot;, bestFitAndDistance);
+<span class="nc" id="L336">	 		PDSMain.displayStrings[7] = &quot;  Fit&quot;;</span>
+<span class="nc" id="L337">	 		PDSMain.displayStrings[8] = &quot;  [&quot; + repeat(&quot;*&quot;, 20*bestLinearFit) </span>
+					+ repeat(&quot; &quot;, 20*(1-bestLinearFit)) + &quot;] &quot; + repeat(&quot;&gt; 50%&quot;, bestLinearFit);
+<span class="nc" id="L339">	 		PDSMain.displayStrings[9] = &quot;  Distance&quot;;</span>
+<span class="nc" id="L340">	 		PDSMain.displayStrings[10] = &quot;  [&quot; + repeat(&quot;*&quot;, 20*bestDistanceMeasure) </span>
+					+ repeat(&quot; &quot;, 20*(1-bestDistanceMeasure)) + &quot;] &quot; + repeat(&quot;&gt; 50%&quot;, bestDistanceMeasure);
+<span class="nc" id="L342">			PDSMain.statisticWindow.showText(PDSMain.displayStrings);</span>
+		}
+		
+<span class="fc" id="L345">		return bestFitAndDistance;</span>
+	}
+	
+	
+	static final double ORDERING_ROUGHNESS = 0.1; // expressed in fraction of screen dimension
+	
+	/**
+	 * Determines whether a Map of 3 points are roughly ordered
+	 * @param points List of points (must be 3)
+	 * @return Whether points are ordered
+	 */
+	private boolean areOrdered(Map&lt;BallCandidate, Point&gt; points) {
+<span class="fc bfc" id="L357" title="All 2 branches covered.">		double xSign = (points.get(BallCandidate.ONE).x - points.get(BallCandidate.TWO).x) &lt; 0 ? -1 : 1;</span>
+<span class="pc bpc" id="L358" title="1 of 2 branches missed.">		double ySign = (points.get(BallCandidate.TWO).y - points.get(BallCandidate.TWO).y) &lt; 0 ? -1 : 1;</span>
+	
+<span class="fc bfc" id="L360" title="All 2 branches covered.">		if ((points.get(BallCandidate.TWO).x - points.get(BallCandidate.THREE).x)*xSign </span>
+				&lt; -1.0*ORDERING_ROUGHNESS*FrameNode.getCols()/2) {
+<span class="fc" id="L362">			return false;</span>
+		}
+<span class="fc bfc" id="L364" title="All 2 branches covered.">		if ((points.get(BallCandidate.TWO).y - points.get(BallCandidate.THREE).y)*ySign </span>
+				&lt; -1.0*ORDERING_ROUGHNESS*FrameNode.getRows()/2) {
+<span class="fc" id="L366">			return false;</span>
+		}
+<span class="fc" id="L368">		return true;</span>
+	}
+	
+	
+	/**
+	 * Returns a deep-cloned / deep-copied List of Point types
+	 */
+	protected List&lt;Point&gt; deepCopy(List&lt;Point&gt; points) {
+<span class="fc" id="L376">		List&lt;Point&gt; newList = new ArrayList&lt;Point&gt;();</span>
+<span class="fc bfc" id="L377" title="All 2 branches covered.">		for (Point p: points) {</span>
+<span class="fc" id="L378">			newList.add(p.clone());</span>
+<span class="fc" id="L379">		}</span>
+<span class="fc" id="L380">		return newList;</span>
+	}
+	
+	
+	/**
+	 * Updates program data with the calculated game status.  
+	 * Calls ConsoleOutput if the status has changed or if a time interval has expired.
+	 * @param status The decided-upon status of the ping-pong table
+	 */
+	void update(GameStatus status) {
+<span class="nc bnc" id="L390" title="All 2 branches missed.">		if (aggStore.getGameStatus() != status) {  </span>
+<span class="nc" id="L391">			out.printStatus(status);</span>
+		}
+<span class="nc bnc" id="L393" title="All 2 branches missed.">		else if (frameNum - aggStore.getStatusFrameNum(status) &gt; REPRINT_STATUS_INTERVAL) {</span>
+<span class="nc" id="L394">			System.out.print(&quot;REPEAT STATUS: &quot;);  //TODO: get bryan to code in ConsoleOutput</span>
+<span class="nc" id="L395">			out.printStatus(status);</span>
+		}
+<span class="nc" id="L397">		aggStore.setStatus(status, frameNum);</span>
+<span class="nc" id="L398">	}</span>
+	
+	
+	/**
+	 * Utility method for GUI display code
+	 */
+	private String repeat(String string, double roundedCount) {
+<span class="fc" id="L405">		String repeated = new String(&quot;&quot;);</span>
+<span class="fc" id="L406">		long count = Math.round(roundedCount);</span>
+<span class="fc bfc" id="L407" title="All 2 branches covered.">		for (int i=0; i&lt;count; i++) {</span>
+<span class="fc" id="L408">			repeated += string;</span>
+		}
+<span class="fc" id="L410">		return repeated;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.3.20130409-1102</span></div></body></html>

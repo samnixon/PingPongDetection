@@ -1,0 +1,38 @@
+<html xmlns:string="xalan://java.lang.String" xmlns:lxslt="http://xml.apache.org/xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Standard Error from PDSMainTest</title>
+</head>
+<body>
+<pre>Exception in thread "Thread-1" java.lang.NullPointerException
+	at pds.input.ConsoleInput.run(ConsoleInput.java:49)
+java.awt.HeadlessException: 
+No X11 DISPLAY variable was set, but this program performed an operation which requires it.
+	at java.awt.GraphicsEnvironment.checkHeadless(GraphicsEnvironment.java:207)
+	at java.awt.Window.&lt;init&gt;(Window.java:535)
+	at java.awt.Frame.&lt;init&gt;(Frame.java:420)
+	at javax.swing.JFrame.&lt;init&gt;(JFrame.java:218)
+	at pds.cvSvc.MatDisplay.&lt;init&gt;(MatDisplay.java:53)
+	at pds.cvSvc.MatDisplay.&lt;init&gt;(MatDisplay.java:77)
+	at pds.PDSMain.programLoop(PDSMain.java:91)
+	at pds.PDSMainTest$1.run(PDSMainTest.java:26)
+java.awt.HeadlessException: 
+No X11 DISPLAY variable was set, but this program performed an operation which requires it.
+	at java.awt.GraphicsEnvironment.checkHeadless(GraphicsEnvironment.java:207)
+	at java.awt.Window.&lt;init&gt;(Window.java:535)
+	at java.awt.Frame.&lt;init&gt;(Frame.java:420)
+	at javax.swing.JFrame.&lt;init&gt;(JFrame.java:218)
+	at pds.cvSvc.MatDisplay.&lt;init&gt;(MatDisplay.java:53)
+	at pds.cvSvc.MatDisplay.&lt;init&gt;(MatDisplay.java:77)
+	at pds.cvSvc.ExtractObjectCandidates.&lt;clinit&gt;(ExtractObjectCandidates.java:24)
+	at pds.cvSvc.MatDisplay.showRacketCandidates(MatDisplay.java:125)
+	at pds.PDSMain.programLoop(PDSMain.java:110)
+	at pds.PDSMainTest$1.run(PDSMainTest.java:26)
+Exception in thread "Thread-2" java.lang.NullPointerException
+	at pds.cvSvc.MatDisplay.updateResult(MatDisplay.java:87)
+	at pds.cvSvc.MatDisplay.showRacketCandidates(MatDisplay.java:134)
+	at pds.PDSMain.programLoop(PDSMain.java:110)
+	at pds.PDSMainTest$1.run(PDSMainTest.java:26)
+</pre>
+</body>
+</html>

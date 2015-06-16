@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ConsoleOutput.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Test Coverage Report of 1325, December 2 2014 for Revision ${revision}</a> &gt; <a href="index.html" class="el_package">pds.output</a> &gt; <span class="el_source">ConsoleOutput.java</span></div><h1>ConsoleOutput.java</h1><pre class="source lang-java linenums">package pds.output;
+
+import java.util.Calendar;
+import java.sql.Timestamp;
+
+import pds.sitAnalyze.AggregateStore.GameStatus;
+
+/**
+ * Class that handles the operations for output to the
+ * console, notifying employees of the current table status.
+ * @author Bryan Schmier
+ */
+<span class="fc" id="L13">public class ConsoleOutput {</span>
+	
+	/**
+	 * Prints an error message to error output
+	 * @param errStr
+	 */
+	public void error(String errStr) {
+<span class="nc" id="L20">		System.err.println(&quot;\nERROR: &quot; + errStr + '\n');</span>
+<span class="nc" id="L21">	}</span>
+	
+	/**
+	 * Prints the status of the ping-pong game to the console
+	 * depending on the current GameStatus case.
+	 * @param s
+	 */
+	public void printStatus(GameStatus s) {
+<span class="fc" id="L29">		Timestamp currentTimestamp = new Timestamp(Calendar.getInstance().getTime().getTime());</span>
+<span class="pc bpc" id="L30" title="1 of 5 branches missed.">		switch(s) {</span>
+		case InUse:
+<span class="fc" id="L32">			System.out.println(currentTimestamp +&quot;  &quot; +</span>
+		&quot;Ping pong game is in progress.&quot;);
+<span class="fc" id="L34">			break;</span>
+
+		case Free:
+<span class="fc" id="L37">			System.out.println(currentTimestamp +&quot;  &quot; +</span>
+		&quot;The ping pong table is available.&quot;);
+<span class="fc" id="L39">			break;</span>
+
+		case NoTable:
+<span class="fc" id="L42">			System.out.println(currentTimestamp +&quot;  &quot; +</span>
+		&quot;Camera no longer pointing at the table.&quot;);
+<span class="fc" id="L44">			break;</span>
+
+		case CameraError:
+<span class="fc" id="L47">			System.out.println(currentTimestamp +&quot;  &quot; +</span>
+		&quot;Error: Camera.&quot;);
+<span class="fc" id="L49">			break;</span>
+			
+		default:
+<span class="fc" id="L52">			break;</span>
+		}
+<span class="fc" id="L54">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.3.20130409-1102</span></div></body></html>

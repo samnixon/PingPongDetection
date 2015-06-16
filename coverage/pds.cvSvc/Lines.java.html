@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Lines.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Test Coverage Report of 1325, December 2 2014 for Revision ${revision}</a> &gt; <a href="index.html" class="el_package">pds.cvSvc</a> &gt; <span class="el_source">Lines.java</span></div><h1>Lines.java</h1><pre class="source lang-java linenums">package pds.cvSvc;
+
+import org.opencv.core.Core;
+import org.opencv.core.CvType;
+import org.opencv.core.Point;
+import org.opencv.core.Scalar;
+
+import java.util.*;
+import java.util.concurrent.CountDownLatch;
+
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
+
+
+/**
+ * 
+ * @author original class: Rui Xu, replacement class: Sam Nixon, skeleton code: Chris Guinnup
+ *
+ */
+
+public class Lines implements Runnable {
+	
+	LineStore lineStore;
+	CVFrame frame;
+	protected CountDownLatch cdLatch;
+	private static LinkedList&lt;Mat&gt; previousLines;
+<span class="fc" id="L27">	private int MAX_QUEUE_SIZE = 60;</span>
+<span class="fc" id="L28">	private double MIN_PROPORTION = .8;</span>
+	
+	
+<span class="fc" id="L31">	public Lines(CVFrame currentFrame, LineStore lineStore, CountDownLatch cdLatch) {</span>
+<span class="fc" id="L32">		this.frame = currentFrame;</span>
+<span class="fc" id="L33">		this.lineStore = lineStore;</span>
+<span class="fc" id="L34">		this.cdLatch = cdLatch;</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">		if (previousLines == null){</span>
+<span class="fc" id="L36">			Lines.previousLines = new LinkedList&lt;Mat&gt;();</span>
+		}
+<span class="fc" id="L38">	}</span>
+	
+	private Mat generateAverage(){
+<span class="nc" id="L41">		Mat average = Mat.zeros(frame.getDimensions(), CvType.CV_8U);</span>
+		
+		//System.out.println(frame.getFrameNumber() + &quot; starting line avg&quot;);//debug
+		
+<span class="nc" id="L45">		Iterator&lt;Mat&gt; li = previousLines.iterator();</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">		while (li.hasNext()){</span>
+<span class="nc" id="L47">			Core.add(average, li.next(), average, new Mat(), CvType.CV_8U);</span>
+		}
+<span class="nc" id="L49">		Imgproc.threshold(average, average, (MAX_QUEUE_SIZE*MIN_PROPORTION), 255, Imgproc.THRESH_BINARY);</span>
+		
+		//System.out.println(frame.getFrameNumber() + &quot; ending line avg&quot;);//debug
+		
+<span class="nc" id="L53">		return average;</span>
+	}
+	
+	private Mat extractLines(Mat image){
+<span class="fc" id="L57">		Mat lines = new Mat();</span>
+<span class="fc" id="L58">		Mat result = Mat.zeros(image.size(), CvType.CV_8U);</span>
+<span class="fc" id="L59">		Imgproc.HoughLinesP(image, lines, 1, Math.PI/180, 80, 130, 0);</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">		for (int x = 0; x &lt; lines.cols(); x++) </span>
+		{
+<span class="fc" id="L62">			double[] vec = lines.get(0, x);</span>
+<span class="fc" id="L63">			double x1 = vec[0], </span>
+<span class="fc" id="L64">					y1 = vec[1],</span>
+<span class="fc" id="L65">					x2 = vec[2],</span>
+<span class="fc" id="L66">					y2 = vec[3];</span>
+<span class="fc" id="L67">			Point start = new Point(x1, y1);</span>
+<span class="fc" id="L68">			Point end = new Point(x2, y2);</span>
+			//Draw the line if needed
+			
+<span class="fc" id="L71">			Core.line(result, start, end, new Scalar(1), 2);</span>
+		}
+<span class="fc" id="L73">		return result;</span>
+	}
+
+
+	
+	/**
+	 * Runs OpenCV algorithm for line detection on a single frame
+	 */
+	@Override
+	public void run() {
+		// OpenCV algorithmic code here 
+		//  using 'frame' as input and 'lineStore' for output
+		
+		/*
+		 *  How to hook up to our system:
+		 *  
+			use ConvertFrameNode with frame.getData();
+			store result to lineStore.addResult(frameNum, result);
+		 */
+				
+		// tells main thread that this method is finished
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">		if (frame!=null){</span>
+			
+<span class="fc" id="L96">			ArrayList&lt;Point&gt; result = new ArrayList&lt;Point&gt;();</span>
+<span class="fc" id="L97">			Mat src = frame.getData();</span>
+<span class="fc" id="L98">			Mat dest = new Mat();</span>
+			
+<span class="fc" id="L100">			Mat color_dest = Mat.zeros(frame.getDimensions(), CvType.CV_8U);</span>
+<span class="fc" id="L101">			Imgproc.threshold(src, dest, 200, 255, Imgproc.THRESH_BINARY); </span>
+<span class="fc" id="L102">			Core.divide(255, dest, dest);</span>
+			
+<span class="pc bpc" id="L104" title="1 of 2 branches missed.">			if (previousLines.size() == MAX_QUEUE_SIZE){</span>
+<span class="nc" id="L105">				previousLines.poll();</span>
+			}
+<span class="fc" id="L107">			previousLines.add(extractLines(dest));</span>
+			
+			
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">			if (previousLines.size() == MAX_QUEUE_SIZE){</span>
+				
+<span class="nc" id="L112">				Mat average = generateAverage();</span>
+				//Imgproc.Canny(average, average, 50, 255);
+<span class="nc" id="L114">				Mat lines = new Mat();</span>
+<span class="nc" id="L115">				Imgproc.HoughLinesP(average, lines, 1, Math.PI/180, 80, 100, 0);</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">				for (int x = 0; x &lt; lines.cols(); x++) </span>
+				{
+<span class="nc" id="L118">					double[] vec = lines.get(0, x);</span>
+<span class="nc" id="L119">					double x1 = vec[0], </span>
+<span class="nc" id="L120">							y1 = vec[1],</span>
+<span class="nc" id="L121">							x2 = vec[2],</span>
+<span class="nc" id="L122">							y2 = vec[3];</span>
+<span class="nc" id="L123">					Point start = new Point(x1, y1);</span>
+<span class="nc" id="L124">					Point end = new Point(x2, y2);</span>
+					
+<span class="nc" id="L126">					result.add(start);</span>
+<span class="nc" id="L127">					result.add(end);</span>
+					//Draw the line if needed
+					
+<span class="nc" id="L130">					Core.line(color_dest, start, end, new Scalar(255), 2);</span>
+<span class="nc" id="L131">					lineStore.addResult(frame.getFrameNumber(), result);</span>
+				}
+				//System.out.println(lines.cols()); // prints out how many lines
+			}
+		}
+		
+		
+<span class="fc" id="L138">		cdLatch.countDown();</span>
+<span class="fc" id="L139">	}</span>
+	
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.3.20130409-1102</span></div></body></html>

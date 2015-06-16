@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DiffMotion.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Test Coverage Report of 1325, December 2 2014 for Revision ${revision}</a> &gt; <a href="index.html" class="el_package">pds.cvSvc</a> &gt; <span class="el_source">DiffMotion.java</span></div><h1>DiffMotion.java</h1><pre class="source lang-java linenums">package pds.cvSvc;
+
+import java.util.concurrent.CountDownLatch;
+
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.core.Scalar;
+import org.opencv.core.Size;
+import org.opencv.imgproc.Imgproc;
+
+import pds.videoSvc.FrameNode;
+
+/**
+ * Quick method of detecting motion between two frames based on summed, gated difference.
+ * @author Chris Guinnup
+ *
+ */
+
+public class DiffMotion implements Runnable {
+
+	CVFrame frame1, frame2;
+	DiffStore diffStore;
+	CountDownLatch cdLatch;
+	
+	/**
+	 * Initializes the thread with its necessary references
+	 */
+<span class="fc" id="L28">	public DiffMotion(CVFrame previousFrame, CVFrame currentFrame, DiffStore diffStore, CountDownLatch cdLatch) {</span>
+<span class="fc" id="L29">		this.diffStore = diffStore;</span>
+<span class="fc" id="L30">		this.frame1 = previousFrame;</span>
+<span class="fc" id="L31">		this.frame2 = currentFrame;</span>
+<span class="fc" id="L32">		this.cdLatch = cdLatch;</span>
+<span class="fc" id="L33">	}</span>
+	
+	/**
+	 * Runs algorithm for weighted difference between a pair of frames
+	 */
+	@Override
+	public void run() {
+		// algorithmic code here 
+		// using frame1 and frame2 as input and diffStore as output
+<span class="fc" id="L42">		long frameNum = frame2.getFrameNumber();</span>
+<span class="fc" id="L43">		int size = (int)frame1.getData().size().area();</span>
+<span class="fc" id="L44">		byte [] imageData = new byte[size];</span>
+<span class="fc" id="L45">		long weight = 0;</span>
+		Scalar sum;
+		
+<span class="fc" id="L48">		Mat difference = new Mat(); </span>
+<span class="fc" id="L49">		Mat multiplied = new Mat();</span>
+<span class="fc" id="L50">		Mat postThreshold = new Mat();</span>
+		
+<span class="fc" id="L52">		Core.subtract(frame1.getData(), frame2.getData(), difference);</span>
+<span class="fc" id="L53">		Core.multiply(difference, new Scalar(3), multiplied);</span>
+<span class="fc" id="L54">		Imgproc.threshold(multiplied, postThreshold, 100, 255, Imgproc.THRESH_TOZERO);</span>
+<span class="fc" id="L55">		sum = Core.sumElems(postThreshold);</span>
+		
+<span class="fc" id="L57">		diffStore.addResult(frameNum, sum.val[0]);</span>
+		
+		// sanity check
+		/*if (frameNum%10 == 0) {
+			System.out.println(&quot;(Frame &quot;+frameNum+&quot;) WeightedDiff = &quot; + sum.val[0]); 
+		}*/
+	
+		// tells main thread that this method is finished
+<span class="fc" id="L65">		cdLatch.countDown();</span>
+<span class="fc" id="L66">	}</span>
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.3.20130409-1102</span></div></body></html>

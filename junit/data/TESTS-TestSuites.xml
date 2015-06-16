@@ -1,0 +1,2047 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+  <testsuite errors="1" failures="1" hostname="cisc475-2" id="0" name="PDSMainTest" package="pds" skipped="0" tests="2" time="2.574" timestamp="2014-12-02T18:25:47">
+      <properties>
+          <property name="java.vendor" value="Oracle Corporation" />
+
+          <property name="hamcrest.jar" value="/opt/local/lib/hamcrest-core-1.3.jar" />
+
+          <property name="sun.java.launcher" value="SUN_STANDARD" />
+
+          <property name="jna.platform" value="/opt/local/lib/jna-platform-4.0.0.jar" />
+
+          <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers" />
+
+          <property name="os.name" value="Linux" />
+
+          <property name="sun.boot.class.path" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/resources.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jsse.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jce.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/charsets.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/netx.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/plugin.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rhino.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jfr.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/classes" />
+
+          <property name="TODAY" value="December 2 2014" />
+
+          <property name="jar-name" value="PDS.jar" />
+
+          <property name="java.vm.specification.vendor" value="Oracle Corporation" />
+
+          <property name="ant.home" value="/usr/share/ant" />
+
+          <property name="java.runtime.version" value="1.7.0_55-b14" />
+
+          <property name="user.name" value="cguinnup" />
+
+          <property name="user.language" value="en" />
+
+          <property name="sun.boot.library.path" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64" />
+
+          <property name="ant.project.default-target" value="all" />
+
+          <property name="ant.project.name" value="PDS" />
+
+          <property name="DSTAMP" value="20141202" />
+
+          <property name="java.version" value="1.7.0_55" />
+
+          <property name="user.timezone" value="" />
+
+          <property name="sun.arch.data.model" value="64" />
+
+          <property name="test.src.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/test" />
+
+          <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/endorsed" />
+
+          <property name="sun.cpu.isalist" value="" />
+
+          <property name="sun.jnu.encoding" value="UTF-8" />
+
+          <property name="file.encoding.pkg" value="sun.io" />
+
+          <property name="file.separator" value="/" />
+
+          <property name="java.specification.name" value="Java Platform API Specification" />
+
+          <property name="java.class.version" value="51.0" />
+
+          <property name="user.country" value="US" />
+
+          <property name="ant.file.PDS" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/build.xml" />
+
+          <property name="java.home" value="/usr/lib/jvm/java-7-openjdk-amd64/jre" />
+
+          <property name="java.vm.info" value="mixed mode" />
+
+          <property name="main-class" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/src/PDSMain.java" />
+
+          <property name="ant.file" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/build.xml" />
+
+          <property name="os.version" value="3.13.0-34-generic" />
+
+          <property name="opencv.jar" value="/opt/local/lib/opencv-2410.jar" />
+
+          <property name="path.separator" value=":" />
+
+          <property name="java.vm.version" value="24.51-b03" />
+
+          <property name="jna.jar" value="/opt/local/lib/jna-4.0.0.jar" />
+
+          <property name="ant.library.dir" value="/usr/share/ant/lib" />
+
+          <property name="java.awt.printerjob" value="sun.print.PSPrinterJob" />
+
+          <property name="sun.io.unicode.encoding" value="UnicodeLittle" />
+
+          <property name="awt.toolkit" value="sun.awt.X11.XToolkit" />
+
+          <property name="_jacoco.agentFile" value="/tmp/jacocoagent8720312422921614156.jar" />
+
+          <property name="coverage.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/coverage" />
+
+          <property name="user.home" value="/usa/cguinnup" />
+
+          <property name="java.specification.vendor" value="Oracle Corporation" />
+
+          <property name="junit.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit" />
+
+          <property name="java.library.path" value="/opt/local/lib" />
+
+          <property name="java.vendor.url" value="http://java.oracle.com/" />
+
+          <property name="bin.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin" />
+
+          <property name="java.vm.vendor" value="Oracle Corporation" />
+
+          <property name="java.runtime.name" value="OpenJDK Runtime Environment" />
+
+          <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner testsfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junittestcases3485251318768657405.properties skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=false outputtoformatters=true logfailedtests=true logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/data/IGNORETHIS.xml crashfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junitvmwatcher4443578690425769119.properties propsfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit3059755455683264835.properties" />
+
+          <property name="java.class.path" value="/opt/local/lib/vlcj-3.0.0.jar:/opt/local/lib/jna-4.0.0.jar:/opt/local/lib/jna-platform-4.0.0.jar:/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin-test:/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin:/opt/local/lib/junit-4.11.jar:/opt/local/lib/hamcrest-core-1.3.jar:/opt/local/lib/opencv-2410.jar:/usr/share/ant/lib/junit.jar:/usr/share/java/ant-launcher-1.9.3.jar:/usr/share/ant/lib/ant.jar:/usr/share/ant/lib/ant-junit.jar:/usr/share/ant/lib/ant-junit4.jar:/tmp/jacocoagent8720312422921614156.jar" />
+
+          <property name="ant.version" value="Apache Ant(TM) version 1.9.3 compiled on April 8 2014" />
+
+          <property name="TSTAMP" value="1325" />
+
+          <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
+
+          <property name="ant.file.type" value="file" />
+
+          <property name="java.vm.specification.version" value="1.7" />
+
+          <property name="junit.jar" value="/opt/local/lib/junit-4.11.jar" />
+
+          <property name="sun.cpu.endian" value="little" />
+
+          <property name="sun.os.patch.level" value="unknown" />
+
+          <property name="junit.reports.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/reports" />
+
+          <property name="ant.file.type.PDS" value="file" />
+
+          <property name="java.io.tmpdir" value="/tmp" />
+
+          <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/" />
+
+          <property name="properties.file" value="build_default.properties" />
+
+          <property name="os.arch" value="amd64" />
+
+          <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment" />
+
+          <property name="java.ext.dirs" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext:/usr/java/packages/lib/ext" />
+
+          <property name="user.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk" />
+
+          <property name="vlcj.jar" value="/opt/local/lib/vlcj-3.0.0.jar" />
+
+          <property name="libdir" value="/opt/local/lib" />
+
+          <property name="line.separator" value="&#xa;" />
+
+          <property name="java.vm.name" value="OpenJDK 64-Bit Server VM" />
+
+          <property name="test.bin.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin-test" />
+
+          <property name="junit.data.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/data" />
+
+          <property name="basedir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk" />
+
+          <property name="root" value="/opt/local/lib" />
+
+          <property name="ant.java.version" value="1.7" />
+
+          <property name="ant.core.lib" value="/usr/share/ant/lib/ant.jar" />
+
+          <property name="file.encoding" value="UTF-8" />
+
+          <property name="jacoco.jar" value="/opt/local/lib/jacoco/lib/jacocoant.jar" />
+
+          <property name="java.specification.version" value="1.7" />
+
+          <property name="src.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/src" />
+
+          <property name="ant.project.invoked-targets" value="all" />
+
+          <property name="javadoc.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/javadoc" />
+
+          <property name="jar-path" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/PDS.jar" />
+
+      </properties>
+
+      <testcase classname="pds.PDSMainTest" name="testBadInput" time="0.397">
+          <error type="java.lang.NullPointerException">java.lang.NullPointerException
+	at pds.videoSvc.VLCJVideoSvc.startVideoSvc(VLCJVideoSvc.java:37)
+	at pds.PDSMain.initialize(PDSMain.java:181)
+	at pds.PDSMain.main(PDSMain.java:67)
+	at pds.PDSMainTest.testBadInput(PDSMainTest.java:60)
+</error>
+
+      </testcase>
+
+      <testcase classname="pds.PDSMainTest" name="testProgramLoop" time="2.029">
+          <failure message="Timeout elapsed!" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: Timeout elapsed!
+	at pds.PDSMainTest.testProgramLoop(PDSMainTest.java:38)
+</failure>
+
+      </testcase>
+
+      <system-out><![CDATA[HEADLESS ENVIRONMENT = TRUE
+]]></system-out>
+
+      <system-err><![CDATA[Exception in thread "Thread-1" java.lang.NullPointerException
+	at pds.input.ConsoleInput.run(ConsoleInput.java:49)
+java.awt.HeadlessException: 
+No X11 DISPLAY variable was set, but this program performed an operation which requires it.
+	at java.awt.GraphicsEnvironment.checkHeadless(GraphicsEnvironment.java:207)
+	at java.awt.Window.<init>(Window.java:535)
+	at java.awt.Frame.<init>(Frame.java:420)
+	at javax.swing.JFrame.<init>(JFrame.java:218)
+	at pds.cvSvc.MatDisplay.<init>(MatDisplay.java:53)
+	at pds.cvSvc.MatDisplay.<init>(MatDisplay.java:77)
+	at pds.PDSMain.programLoop(PDSMain.java:91)
+	at pds.PDSMainTest$1.run(PDSMainTest.java:26)
+java.awt.HeadlessException: 
+No X11 DISPLAY variable was set, but this program performed an operation which requires it.
+	at java.awt.GraphicsEnvironment.checkHeadless(GraphicsEnvironment.java:207)
+	at java.awt.Window.<init>(Window.java:535)
+	at java.awt.Frame.<init>(Frame.java:420)
+	at javax.swing.JFrame.<init>(JFrame.java:218)
+	at pds.cvSvc.MatDisplay.<init>(MatDisplay.java:53)
+	at pds.cvSvc.MatDisplay.<init>(MatDisplay.java:77)
+	at pds.cvSvc.ExtractObjectCandidates.<clinit>(ExtractObjectCandidates.java:24)
+	at pds.cvSvc.MatDisplay.showRacketCandidates(MatDisplay.java:125)
+	at pds.PDSMain.programLoop(PDSMain.java:110)
+	at pds.PDSMainTest$1.run(PDSMainTest.java:26)
+Exception in thread "Thread-2" java.lang.NullPointerException
+	at pds.cvSvc.MatDisplay.updateResult(MatDisplay.java:87)
+	at pds.cvSvc.MatDisplay.showRacketCandidates(MatDisplay.java:134)
+	at pds.PDSMain.programLoop(PDSMain.java:110)
+	at pds.PDSMainTest$1.run(PDSMainTest.java:26)
+]]></system-err>
+
+  </testsuite>
+  <testsuite errors="0" failures="0" hostname="cisc475-2" id="1" name="CVFrameTest" package="pds.cvSvc" skipped="0" tests="1" time="0.019" timestamp="2014-12-02T18:25:50">
+      <properties>
+          <property name="java.vendor" value="Oracle Corporation" />
+
+          <property name="hamcrest.jar" value="/opt/local/lib/hamcrest-core-1.3.jar" />
+
+          <property name="sun.java.launcher" value="SUN_STANDARD" />
+
+          <property name="jna.platform" value="/opt/local/lib/jna-platform-4.0.0.jar" />
+
+          <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers" />
+
+          <property name="os.name" value="Linux" />
+
+          <property name="sun.boot.class.path" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/resources.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jsse.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jce.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/charsets.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/netx.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/plugin.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rhino.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jfr.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/classes" />
+
+          <property name="TODAY" value="December 2 2014" />
+
+          <property name="jar-name" value="PDS.jar" />
+
+          <property name="java.vm.specification.vendor" value="Oracle Corporation" />
+
+          <property name="ant.home" value="/usr/share/ant" />
+
+          <property name="java.runtime.version" value="1.7.0_55-b14" />
+
+          <property name="user.name" value="cguinnup" />
+
+          <property name="user.language" value="en" />
+
+          <property name="sun.boot.library.path" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64" />
+
+          <property name="ant.project.default-target" value="all" />
+
+          <property name="ant.project.name" value="PDS" />
+
+          <property name="DSTAMP" value="20141202" />
+
+          <property name="java.version" value="1.7.0_55" />
+
+          <property name="user.timezone" value="" />
+
+          <property name="sun.arch.data.model" value="64" />
+
+          <property name="test.src.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/test" />
+
+          <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/endorsed" />
+
+          <property name="sun.cpu.isalist" value="" />
+
+          <property name="sun.jnu.encoding" value="UTF-8" />
+
+          <property name="file.encoding.pkg" value="sun.io" />
+
+          <property name="file.separator" value="/" />
+
+          <property name="java.specification.name" value="Java Platform API Specification" />
+
+          <property name="java.class.version" value="51.0" />
+
+          <property name="user.country" value="US" />
+
+          <property name="ant.file.PDS" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/build.xml" />
+
+          <property name="java.home" value="/usr/lib/jvm/java-7-openjdk-amd64/jre" />
+
+          <property name="java.vm.info" value="mixed mode" />
+
+          <property name="main-class" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/src/PDSMain.java" />
+
+          <property name="ant.file" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/build.xml" />
+
+          <property name="os.version" value="3.13.0-34-generic" />
+
+          <property name="opencv.jar" value="/opt/local/lib/opencv-2410.jar" />
+
+          <property name="path.separator" value=":" />
+
+          <property name="java.vm.version" value="24.51-b03" />
+
+          <property name="jna.jar" value="/opt/local/lib/jna-4.0.0.jar" />
+
+          <property name="ant.library.dir" value="/usr/share/ant/lib" />
+
+          <property name="java.awt.printerjob" value="sun.print.PSPrinterJob" />
+
+          <property name="sun.io.unicode.encoding" value="UnicodeLittle" />
+
+          <property name="awt.toolkit" value="sun.awt.X11.XToolkit" />
+
+          <property name="_jacoco.agentFile" value="/tmp/jacocoagent8720312422921614156.jar" />
+
+          <property name="coverage.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/coverage" />
+
+          <property name="user.home" value="/usa/cguinnup" />
+
+          <property name="java.specification.vendor" value="Oracle Corporation" />
+
+          <property name="junit.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit" />
+
+          <property name="java.library.path" value="/opt/local/lib" />
+
+          <property name="java.vendor.url" value="http://java.oracle.com/" />
+
+          <property name="bin.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin" />
+
+          <property name="java.vm.vendor" value="Oracle Corporation" />
+
+          <property name="java.runtime.name" value="OpenJDK Runtime Environment" />
+
+          <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner testsfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junittestcases3485251318768657405.properties skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=false outputtoformatters=true logfailedtests=true logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/data/IGNORETHIS.xml crashfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junitvmwatcher4443578690425769119.properties propsfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit3059755455683264835.properties" />
+
+          <property name="java.class.path" value="/opt/local/lib/vlcj-3.0.0.jar:/opt/local/lib/jna-4.0.0.jar:/opt/local/lib/jna-platform-4.0.0.jar:/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin-test:/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin:/opt/local/lib/junit-4.11.jar:/opt/local/lib/hamcrest-core-1.3.jar:/opt/local/lib/opencv-2410.jar:/usr/share/ant/lib/junit.jar:/usr/share/java/ant-launcher-1.9.3.jar:/usr/share/ant/lib/ant.jar:/usr/share/ant/lib/ant-junit.jar:/usr/share/ant/lib/ant-junit4.jar:/tmp/jacocoagent8720312422921614156.jar" />
+
+          <property name="ant.version" value="Apache Ant(TM) version 1.9.3 compiled on April 8 2014" />
+
+          <property name="TSTAMP" value="1325" />
+
+          <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
+
+          <property name="ant.file.type" value="file" />
+
+          <property name="java.vm.specification.version" value="1.7" />
+
+          <property name="junit.jar" value="/opt/local/lib/junit-4.11.jar" />
+
+          <property name="sun.cpu.endian" value="little" />
+
+          <property name="sun.os.patch.level" value="unknown" />
+
+          <property name="junit.reports.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/reports" />
+
+          <property name="ant.file.type.PDS" value="file" />
+
+          <property name="java.io.tmpdir" value="/tmp" />
+
+          <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/" />
+
+          <property name="properties.file" value="build_default.properties" />
+
+          <property name="os.arch" value="amd64" />
+
+          <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment" />
+
+          <property name="java.ext.dirs" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext:/usr/java/packages/lib/ext" />
+
+          <property name="user.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk" />
+
+          <property name="vlcj.jar" value="/opt/local/lib/vlcj-3.0.0.jar" />
+
+          <property name="libdir" value="/opt/local/lib" />
+
+          <property name="line.separator" value="&#xa;" />
+
+          <property name="java.vm.name" value="OpenJDK 64-Bit Server VM" />
+
+          <property name="test.bin.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin-test" />
+
+          <property name="junit.data.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/data" />
+
+          <property name="basedir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk" />
+
+          <property name="root" value="/opt/local/lib" />
+
+          <property name="ant.java.version" value="1.7" />
+
+          <property name="ant.core.lib" value="/usr/share/ant/lib/ant.jar" />
+
+          <property name="file.encoding" value="UTF-8" />
+
+          <property name="jacoco.jar" value="/opt/local/lib/jacoco/lib/jacocoant.jar" />
+
+          <property name="java.specification.version" value="1.7" />
+
+          <property name="src.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/src" />
+
+          <property name="ant.project.invoked-targets" value="all" />
+
+          <property name="javadoc.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/javadoc" />
+
+          <property name="jar-path" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/PDS.jar" />
+
+      </properties>
+
+      <testcase classname="pds.cvSvc.CVFrameTest" name="testCVFrame" time="0.005" />
+
+      <system-out />
+
+      <system-err />
+
+  </testsuite>
+  <testsuite errors="0" failures="0" hostname="cisc475-2" id="2" name="CVStoresTest" package="pds.cvSvc" skipped="0" tests="2" time="0.019" timestamp="2014-12-02T18:25:50">
+      <properties>
+          <property name="java.vendor" value="Oracle Corporation" />
+
+          <property name="hamcrest.jar" value="/opt/local/lib/hamcrest-core-1.3.jar" />
+
+          <property name="sun.java.launcher" value="SUN_STANDARD" />
+
+          <property name="jna.platform" value="/opt/local/lib/jna-platform-4.0.0.jar" />
+
+          <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers" />
+
+          <property name="os.name" value="Linux" />
+
+          <property name="sun.boot.class.path" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/resources.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jsse.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jce.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/charsets.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/netx.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/plugin.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rhino.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jfr.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/classes" />
+
+          <property name="TODAY" value="December 2 2014" />
+
+          <property name="jar-name" value="PDS.jar" />
+
+          <property name="java.vm.specification.vendor" value="Oracle Corporation" />
+
+          <property name="ant.home" value="/usr/share/ant" />
+
+          <property name="java.runtime.version" value="1.7.0_55-b14" />
+
+          <property name="user.name" value="cguinnup" />
+
+          <property name="user.language" value="en" />
+
+          <property name="sun.boot.library.path" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64" />
+
+          <property name="ant.project.default-target" value="all" />
+
+          <property name="ant.project.name" value="PDS" />
+
+          <property name="DSTAMP" value="20141202" />
+
+          <property name="java.version" value="1.7.0_55" />
+
+          <property name="user.timezone" value="" />
+
+          <property name="sun.arch.data.model" value="64" />
+
+          <property name="test.src.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/test" />
+
+          <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/endorsed" />
+
+          <property name="sun.cpu.isalist" value="" />
+
+          <property name="sun.jnu.encoding" value="UTF-8" />
+
+          <property name="file.encoding.pkg" value="sun.io" />
+
+          <property name="file.separator" value="/" />
+
+          <property name="java.specification.name" value="Java Platform API Specification" />
+
+          <property name="java.class.version" value="51.0" />
+
+          <property name="user.country" value="US" />
+
+          <property name="ant.file.PDS" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/build.xml" />
+
+          <property name="java.home" value="/usr/lib/jvm/java-7-openjdk-amd64/jre" />
+
+          <property name="java.vm.info" value="mixed mode" />
+
+          <property name="main-class" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/src/PDSMain.java" />
+
+          <property name="ant.file" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/build.xml" />
+
+          <property name="os.version" value="3.13.0-34-generic" />
+
+          <property name="opencv.jar" value="/opt/local/lib/opencv-2410.jar" />
+
+          <property name="path.separator" value=":" />
+
+          <property name="java.vm.version" value="24.51-b03" />
+
+          <property name="jna.jar" value="/opt/local/lib/jna-4.0.0.jar" />
+
+          <property name="ant.library.dir" value="/usr/share/ant/lib" />
+
+          <property name="java.awt.printerjob" value="sun.print.PSPrinterJob" />
+
+          <property name="sun.io.unicode.encoding" value="UnicodeLittle" />
+
+          <property name="awt.toolkit" value="sun.awt.X11.XToolkit" />
+
+          <property name="_jacoco.agentFile" value="/tmp/jacocoagent8720312422921614156.jar" />
+
+          <property name="coverage.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/coverage" />
+
+          <property name="user.home" value="/usa/cguinnup" />
+
+          <property name="java.specification.vendor" value="Oracle Corporation" />
+
+          <property name="junit.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit" />
+
+          <property name="java.library.path" value="/opt/local/lib" />
+
+          <property name="java.vendor.url" value="http://java.oracle.com/" />
+
+          <property name="bin.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin" />
+
+          <property name="java.vm.vendor" value="Oracle Corporation" />
+
+          <property name="java.runtime.name" value="OpenJDK Runtime Environment" />
+
+          <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner testsfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junittestcases3485251318768657405.properties skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=false outputtoformatters=true logfailedtests=true logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/data/IGNORETHIS.xml crashfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junitvmwatcher4443578690425769119.properties propsfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit3059755455683264835.properties" />
+
+          <property name="java.class.path" value="/opt/local/lib/vlcj-3.0.0.jar:/opt/local/lib/jna-4.0.0.jar:/opt/local/lib/jna-platform-4.0.0.jar:/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin-test:/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin:/opt/local/lib/junit-4.11.jar:/opt/local/lib/hamcrest-core-1.3.jar:/opt/local/lib/opencv-2410.jar:/usr/share/ant/lib/junit.jar:/usr/share/java/ant-launcher-1.9.3.jar:/usr/share/ant/lib/ant.jar:/usr/share/ant/lib/ant-junit.jar:/usr/share/ant/lib/ant-junit4.jar:/tmp/jacocoagent8720312422921614156.jar" />
+
+          <property name="ant.version" value="Apache Ant(TM) version 1.9.3 compiled on April 8 2014" />
+
+          <property name="TSTAMP" value="1325" />
+
+          <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
+
+          <property name="ant.file.type" value="file" />
+
+          <property name="java.vm.specification.version" value="1.7" />
+
+          <property name="junit.jar" value="/opt/local/lib/junit-4.11.jar" />
+
+          <property name="sun.cpu.endian" value="little" />
+
+          <property name="sun.os.patch.level" value="unknown" />
+
+          <property name="junit.reports.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/reports" />
+
+          <property name="ant.file.type.PDS" value="file" />
+
+          <property name="java.io.tmpdir" value="/tmp" />
+
+          <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/" />
+
+          <property name="properties.file" value="build_default.properties" />
+
+          <property name="os.arch" value="amd64" />
+
+          <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment" />
+
+          <property name="java.ext.dirs" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext:/usr/java/packages/lib/ext" />
+
+          <property name="user.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk" />
+
+          <property name="vlcj.jar" value="/opt/local/lib/vlcj-3.0.0.jar" />
+
+          <property name="libdir" value="/opt/local/lib" />
+
+          <property name="line.separator" value="&#xa;" />
+
+          <property name="java.vm.name" value="OpenJDK 64-Bit Server VM" />
+
+          <property name="test.bin.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin-test" />
+
+          <property name="junit.data.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/data" />
+
+          <property name="basedir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk" />
+
+          <property name="root" value="/opt/local/lib" />
+
+          <property name="ant.java.version" value="1.7" />
+
+          <property name="ant.core.lib" value="/usr/share/ant/lib/ant.jar" />
+
+          <property name="file.encoding" value="UTF-8" />
+
+          <property name="jacoco.jar" value="/opt/local/lib/jacoco/lib/jacocoant.jar" />
+
+          <property name="java.specification.version" value="1.7" />
+
+          <property name="src.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/src" />
+
+          <property name="ant.project.invoked-targets" value="all" />
+
+          <property name="javadoc.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/javadoc" />
+
+          <property name="jar-path" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/PDS.jar" />
+
+      </properties>
+
+      <testcase classname="pds.cvSvc.CVStoresTest" name="testGetNumStores" time="0.0" />
+
+      <testcase classname="pds.cvSvc.CVStoresTest" name="testCVStores" time="0.001" />
+
+      <system-out />
+
+      <system-err />
+
+  </testsuite>
+  <testsuite errors="0" failures="0" hostname="cisc475-2" id="3" name="ConvertFrameNodeTest" package="pds.cvSvc" skipped="0" tests="1" time="0.494" timestamp="2014-12-02T18:25:50">
+      <properties>
+          <property name="java.vendor" value="Oracle Corporation" />
+
+          <property name="hamcrest.jar" value="/opt/local/lib/hamcrest-core-1.3.jar" />
+
+          <property name="sun.java.launcher" value="SUN_STANDARD" />
+
+          <property name="jna.platform" value="/opt/local/lib/jna-platform-4.0.0.jar" />
+
+          <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers" />
+
+          <property name="os.name" value="Linux" />
+
+          <property name="sun.boot.class.path" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/resources.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jsse.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jce.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/charsets.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/netx.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/plugin.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rhino.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jfr.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/classes" />
+
+          <property name="TODAY" value="December 2 2014" />
+
+          <property name="jar-name" value="PDS.jar" />
+
+          <property name="java.vm.specification.vendor" value="Oracle Corporation" />
+
+          <property name="ant.home" value="/usr/share/ant" />
+
+          <property name="java.runtime.version" value="1.7.0_55-b14" />
+
+          <property name="user.name" value="cguinnup" />
+
+          <property name="user.language" value="en" />
+
+          <property name="sun.boot.library.path" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64" />
+
+          <property name="ant.project.default-target" value="all" />
+
+          <property name="ant.project.name" value="PDS" />
+
+          <property name="DSTAMP" value="20141202" />
+
+          <property name="java.version" value="1.7.0_55" />
+
+          <property name="user.timezone" value="" />
+
+          <property name="sun.arch.data.model" value="64" />
+
+          <property name="test.src.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/test" />
+
+          <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/endorsed" />
+
+          <property name="sun.cpu.isalist" value="" />
+
+          <property name="sun.jnu.encoding" value="UTF-8" />
+
+          <property name="file.encoding.pkg" value="sun.io" />
+
+          <property name="file.separator" value="/" />
+
+          <property name="java.specification.name" value="Java Platform API Specification" />
+
+          <property name="java.class.version" value="51.0" />
+
+          <property name="user.country" value="US" />
+
+          <property name="ant.file.PDS" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/build.xml" />
+
+          <property name="java.home" value="/usr/lib/jvm/java-7-openjdk-amd64/jre" />
+
+          <property name="java.vm.info" value="mixed mode" />
+
+          <property name="main-class" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/src/PDSMain.java" />
+
+          <property name="ant.file" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/build.xml" />
+
+          <property name="os.version" value="3.13.0-34-generic" />
+
+          <property name="opencv.jar" value="/opt/local/lib/opencv-2410.jar" />
+
+          <property name="path.separator" value=":" />
+
+          <property name="java.vm.version" value="24.51-b03" />
+
+          <property name="jna.jar" value="/opt/local/lib/jna-4.0.0.jar" />
+
+          <property name="ant.library.dir" value="/usr/share/ant/lib" />
+
+          <property name="java.awt.printerjob" value="sun.print.PSPrinterJob" />
+
+          <property name="sun.io.unicode.encoding" value="UnicodeLittle" />
+
+          <property name="awt.toolkit" value="sun.awt.X11.XToolkit" />
+
+          <property name="_jacoco.agentFile" value="/tmp/jacocoagent8720312422921614156.jar" />
+
+          <property name="coverage.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/coverage" />
+
+          <property name="user.home" value="/usa/cguinnup" />
+
+          <property name="java.specification.vendor" value="Oracle Corporation" />
+
+          <property name="junit.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit" />
+
+          <property name="java.library.path" value="/opt/local/lib" />
+
+          <property name="java.vendor.url" value="http://java.oracle.com/" />
+
+          <property name="bin.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin" />
+
+          <property name="java.vm.vendor" value="Oracle Corporation" />
+
+          <property name="java.runtime.name" value="OpenJDK Runtime Environment" />
+
+          <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner testsfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junittestcases3485251318768657405.properties skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=false outputtoformatters=true logfailedtests=true logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/data/IGNORETHIS.xml crashfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junitvmwatcher4443578690425769119.properties propsfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit3059755455683264835.properties" />
+
+          <property name="java.class.path" value="/opt/local/lib/vlcj-3.0.0.jar:/opt/local/lib/jna-4.0.0.jar:/opt/local/lib/jna-platform-4.0.0.jar:/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin-test:/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin:/opt/local/lib/junit-4.11.jar:/opt/local/lib/hamcrest-core-1.3.jar:/opt/local/lib/opencv-2410.jar:/usr/share/ant/lib/junit.jar:/usr/share/java/ant-launcher-1.9.3.jar:/usr/share/ant/lib/ant.jar:/usr/share/ant/lib/ant-junit.jar:/usr/share/ant/lib/ant-junit4.jar:/tmp/jacocoagent8720312422921614156.jar" />
+
+          <property name="ant.version" value="Apache Ant(TM) version 1.9.3 compiled on April 8 2014" />
+
+          <property name="TSTAMP" value="1325" />
+
+          <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
+
+          <property name="ant.file.type" value="file" />
+
+          <property name="java.vm.specification.version" value="1.7" />
+
+          <property name="junit.jar" value="/opt/local/lib/junit-4.11.jar" />
+
+          <property name="sun.cpu.endian" value="little" />
+
+          <property name="sun.os.patch.level" value="unknown" />
+
+          <property name="junit.reports.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/reports" />
+
+          <property name="ant.file.type.PDS" value="file" />
+
+          <property name="java.io.tmpdir" value="/tmp" />
+
+          <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/" />
+
+          <property name="properties.file" value="build_default.properties" />
+
+          <property name="os.arch" value="amd64" />
+
+          <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment" />
+
+          <property name="java.ext.dirs" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext:/usr/java/packages/lib/ext" />
+
+          <property name="user.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk" />
+
+          <property name="vlcj.jar" value="/opt/local/lib/vlcj-3.0.0.jar" />
+
+          <property name="libdir" value="/opt/local/lib" />
+
+          <property name="line.separator" value="&#xa;" />
+
+          <property name="java.vm.name" value="OpenJDK 64-Bit Server VM" />
+
+          <property name="test.bin.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin-test" />
+
+          <property name="junit.data.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/data" />
+
+          <property name="basedir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk" />
+
+          <property name="root" value="/opt/local/lib" />
+
+          <property name="ant.java.version" value="1.7" />
+
+          <property name="ant.core.lib" value="/usr/share/ant/lib/ant.jar" />
+
+          <property name="file.encoding" value="UTF-8" />
+
+          <property name="jacoco.jar" value="/opt/local/lib/jacoco/lib/jacocoant.jar" />
+
+          <property name="java.specification.version" value="1.7" />
+
+          <property name="src.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/src" />
+
+          <property name="ant.project.invoked-targets" value="all" />
+
+          <property name="javadoc.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/javadoc" />
+
+          <property name="jar-path" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/PDS.jar" />
+
+      </properties>
+
+      <testcase classname="pds.cvSvc.ConvertFrameNodeTest" name="TestConversion" time="0.479" />
+
+      <system-out />
+
+      <system-err />
+
+  </testsuite>
+  <testsuite errors="0" failures="0" hostname="cisc475-2" id="4" name="LineStoreTest" package="pds.cvSvc" skipped="0" tests="6" time="0.034" timestamp="2014-12-02T18:25:50">
+      <properties>
+          <property name="java.vendor" value="Oracle Corporation" />
+
+          <property name="hamcrest.jar" value="/opt/local/lib/hamcrest-core-1.3.jar" />
+
+          <property name="sun.java.launcher" value="SUN_STANDARD" />
+
+          <property name="jna.platform" value="/opt/local/lib/jna-platform-4.0.0.jar" />
+
+          <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers" />
+
+          <property name="os.name" value="Linux" />
+
+          <property name="sun.boot.class.path" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/resources.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jsse.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jce.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/charsets.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/netx.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/plugin.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rhino.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jfr.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/classes" />
+
+          <property name="TODAY" value="December 2 2014" />
+
+          <property name="jar-name" value="PDS.jar" />
+
+          <property name="java.vm.specification.vendor" value="Oracle Corporation" />
+
+          <property name="ant.home" value="/usr/share/ant" />
+
+          <property name="java.runtime.version" value="1.7.0_55-b14" />
+
+          <property name="user.name" value="cguinnup" />
+
+          <property name="user.language" value="en" />
+
+          <property name="sun.boot.library.path" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64" />
+
+          <property name="ant.project.default-target" value="all" />
+
+          <property name="ant.project.name" value="PDS" />
+
+          <property name="DSTAMP" value="20141202" />
+
+          <property name="java.version" value="1.7.0_55" />
+
+          <property name="user.timezone" value="" />
+
+          <property name="sun.arch.data.model" value="64" />
+
+          <property name="test.src.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/test" />
+
+          <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/endorsed" />
+
+          <property name="sun.cpu.isalist" value="" />
+
+          <property name="sun.jnu.encoding" value="UTF-8" />
+
+          <property name="file.encoding.pkg" value="sun.io" />
+
+          <property name="file.separator" value="/" />
+
+          <property name="java.specification.name" value="Java Platform API Specification" />
+
+          <property name="java.class.version" value="51.0" />
+
+          <property name="user.country" value="US" />
+
+          <property name="ant.file.PDS" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/build.xml" />
+
+          <property name="java.home" value="/usr/lib/jvm/java-7-openjdk-amd64/jre" />
+
+          <property name="java.vm.info" value="mixed mode" />
+
+          <property name="main-class" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/src/PDSMain.java" />
+
+          <property name="ant.file" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/build.xml" />
+
+          <property name="os.version" value="3.13.0-34-generic" />
+
+          <property name="opencv.jar" value="/opt/local/lib/opencv-2410.jar" />
+
+          <property name="path.separator" value=":" />
+
+          <property name="java.vm.version" value="24.51-b03" />
+
+          <property name="jna.jar" value="/opt/local/lib/jna-4.0.0.jar" />
+
+          <property name="ant.library.dir" value="/usr/share/ant/lib" />
+
+          <property name="java.awt.printerjob" value="sun.print.PSPrinterJob" />
+
+          <property name="sun.io.unicode.encoding" value="UnicodeLittle" />
+
+          <property name="awt.toolkit" value="sun.awt.X11.XToolkit" />
+
+          <property name="_jacoco.agentFile" value="/tmp/jacocoagent8720312422921614156.jar" />
+
+          <property name="coverage.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/coverage" />
+
+          <property name="user.home" value="/usa/cguinnup" />
+
+          <property name="java.specification.vendor" value="Oracle Corporation" />
+
+          <property name="junit.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit" />
+
+          <property name="java.library.path" value="/opt/local/lib" />
+
+          <property name="java.vendor.url" value="http://java.oracle.com/" />
+
+          <property name="bin.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin" />
+
+          <property name="java.vm.vendor" value="Oracle Corporation" />
+
+          <property name="java.runtime.name" value="OpenJDK Runtime Environment" />
+
+          <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner testsfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junittestcases3485251318768657405.properties skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=false outputtoformatters=true logfailedtests=true logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/data/IGNORETHIS.xml crashfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junitvmwatcher4443578690425769119.properties propsfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit3059755455683264835.properties" />
+
+          <property name="java.class.path" value="/opt/local/lib/vlcj-3.0.0.jar:/opt/local/lib/jna-4.0.0.jar:/opt/local/lib/jna-platform-4.0.0.jar:/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin-test:/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin:/opt/local/lib/junit-4.11.jar:/opt/local/lib/hamcrest-core-1.3.jar:/opt/local/lib/opencv-2410.jar:/usr/share/ant/lib/junit.jar:/usr/share/java/ant-launcher-1.9.3.jar:/usr/share/ant/lib/ant.jar:/usr/share/ant/lib/ant-junit.jar:/usr/share/ant/lib/ant-junit4.jar:/tmp/jacocoagent8720312422921614156.jar" />
+
+          <property name="ant.version" value="Apache Ant(TM) version 1.9.3 compiled on April 8 2014" />
+
+          <property name="TSTAMP" value="1325" />
+
+          <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
+
+          <property name="ant.file.type" value="file" />
+
+          <property name="java.vm.specification.version" value="1.7" />
+
+          <property name="junit.jar" value="/opt/local/lib/junit-4.11.jar" />
+
+          <property name="sun.cpu.endian" value="little" />
+
+          <property name="sun.os.patch.level" value="unknown" />
+
+          <property name="junit.reports.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/reports" />
+
+          <property name="ant.file.type.PDS" value="file" />
+
+          <property name="java.io.tmpdir" value="/tmp" />
+
+          <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/" />
+
+          <property name="properties.file" value="build_default.properties" />
+
+          <property name="os.arch" value="amd64" />
+
+          <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment" />
+
+          <property name="java.ext.dirs" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext:/usr/java/packages/lib/ext" />
+
+          <property name="user.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk" />
+
+          <property name="vlcj.jar" value="/opt/local/lib/vlcj-3.0.0.jar" />
+
+          <property name="libdir" value="/opt/local/lib" />
+
+          <property name="line.separator" value="&#xa;" />
+
+          <property name="java.vm.name" value="OpenJDK 64-Bit Server VM" />
+
+          <property name="test.bin.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin-test" />
+
+          <property name="junit.data.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/data" />
+
+          <property name="basedir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk" />
+
+          <property name="root" value="/opt/local/lib" />
+
+          <property name="ant.java.version" value="1.7" />
+
+          <property name="ant.core.lib" value="/usr/share/ant/lib/ant.jar" />
+
+          <property name="file.encoding" value="UTF-8" />
+
+          <property name="jacoco.jar" value="/opt/local/lib/jacoco/lib/jacocoant.jar" />
+
+          <property name="java.specification.version" value="1.7" />
+
+          <property name="src.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/src" />
+
+          <property name="ant.project.invoked-targets" value="all" />
+
+          <property name="javadoc.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/javadoc" />
+
+          <property name="jar-path" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/PDS.jar" />
+
+      </properties>
+
+      <testcase classname="pds.cvSvc.LineStoreTest" name="testTrimming" time="0.005" />
+
+      <testcase classname="pds.cvSvc.LineStoreTest" name="testGetLines" time="0.0" />
+
+      <testcase classname="pds.cvSvc.LineStoreTest" name="testLineStore" time="0.0" />
+
+      <testcase classname="pds.cvSvc.LineStoreTest" name="testWasSkipped" time="0.0" />
+
+      <testcase classname="pds.cvSvc.LineStoreTest" name="testAddResult" time="0.001" />
+
+      <testcase classname="pds.cvSvc.LineStoreTest" name="testSkipJob" time="0.0" />
+
+      <system-out />
+
+      <system-err />
+
+  </testsuite>
+  <testsuite errors="0" failures="0" hostname="cisc475-2" id="5" name="LinesTest" package="pds.cvSvc" skipped="0" tests="2" time="0.699" timestamp="2014-12-02T18:25:50">
+      <properties>
+          <property name="java.vendor" value="Oracle Corporation" />
+
+          <property name="hamcrest.jar" value="/opt/local/lib/hamcrest-core-1.3.jar" />
+
+          <property name="sun.java.launcher" value="SUN_STANDARD" />
+
+          <property name="jna.platform" value="/opt/local/lib/jna-platform-4.0.0.jar" />
+
+          <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers" />
+
+          <property name="os.name" value="Linux" />
+
+          <property name="sun.boot.class.path" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/resources.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jsse.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jce.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/charsets.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/netx.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/plugin.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rhino.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jfr.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/classes" />
+
+          <property name="TODAY" value="December 2 2014" />
+
+          <property name="jar-name" value="PDS.jar" />
+
+          <property name="java.vm.specification.vendor" value="Oracle Corporation" />
+
+          <property name="ant.home" value="/usr/share/ant" />
+
+          <property name="java.runtime.version" value="1.7.0_55-b14" />
+
+          <property name="user.name" value="cguinnup" />
+
+          <property name="user.language" value="en" />
+
+          <property name="sun.boot.library.path" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64" />
+
+          <property name="ant.project.default-target" value="all" />
+
+          <property name="ant.project.name" value="PDS" />
+
+          <property name="DSTAMP" value="20141202" />
+
+          <property name="java.version" value="1.7.0_55" />
+
+          <property name="user.timezone" value="" />
+
+          <property name="sun.arch.data.model" value="64" />
+
+          <property name="test.src.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/test" />
+
+          <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/endorsed" />
+
+          <property name="sun.cpu.isalist" value="" />
+
+          <property name="sun.jnu.encoding" value="UTF-8" />
+
+          <property name="file.encoding.pkg" value="sun.io" />
+
+          <property name="file.separator" value="/" />
+
+          <property name="java.specification.name" value="Java Platform API Specification" />
+
+          <property name="java.class.version" value="51.0" />
+
+          <property name="user.country" value="US" />
+
+          <property name="ant.file.PDS" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/build.xml" />
+
+          <property name="java.home" value="/usr/lib/jvm/java-7-openjdk-amd64/jre" />
+
+          <property name="java.vm.info" value="mixed mode" />
+
+          <property name="main-class" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/src/PDSMain.java" />
+
+          <property name="ant.file" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/build.xml" />
+
+          <property name="os.version" value="3.13.0-34-generic" />
+
+          <property name="opencv.jar" value="/opt/local/lib/opencv-2410.jar" />
+
+          <property name="path.separator" value=":" />
+
+          <property name="java.vm.version" value="24.51-b03" />
+
+          <property name="jna.jar" value="/opt/local/lib/jna-4.0.0.jar" />
+
+          <property name="ant.library.dir" value="/usr/share/ant/lib" />
+
+          <property name="java.awt.printerjob" value="sun.print.PSPrinterJob" />
+
+          <property name="sun.io.unicode.encoding" value="UnicodeLittle" />
+
+          <property name="awt.toolkit" value="sun.awt.X11.XToolkit" />
+
+          <property name="_jacoco.agentFile" value="/tmp/jacocoagent8720312422921614156.jar" />
+
+          <property name="coverage.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/coverage" />
+
+          <property name="user.home" value="/usa/cguinnup" />
+
+          <property name="java.specification.vendor" value="Oracle Corporation" />
+
+          <property name="junit.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit" />
+
+          <property name="java.library.path" value="/opt/local/lib" />
+
+          <property name="java.vendor.url" value="http://java.oracle.com/" />
+
+          <property name="bin.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin" />
+
+          <property name="java.vm.vendor" value="Oracle Corporation" />
+
+          <property name="java.runtime.name" value="OpenJDK Runtime Environment" />
+
+          <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner testsfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junittestcases3485251318768657405.properties skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=false outputtoformatters=true logfailedtests=true logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/data/IGNORETHIS.xml crashfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junitvmwatcher4443578690425769119.properties propsfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit3059755455683264835.properties" />
+
+          <property name="java.class.path" value="/opt/local/lib/vlcj-3.0.0.jar:/opt/local/lib/jna-4.0.0.jar:/opt/local/lib/jna-platform-4.0.0.jar:/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin-test:/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin:/opt/local/lib/junit-4.11.jar:/opt/local/lib/hamcrest-core-1.3.jar:/opt/local/lib/opencv-2410.jar:/usr/share/ant/lib/junit.jar:/usr/share/java/ant-launcher-1.9.3.jar:/usr/share/ant/lib/ant.jar:/usr/share/ant/lib/ant-junit.jar:/usr/share/ant/lib/ant-junit4.jar:/tmp/jacocoagent8720312422921614156.jar" />
+
+          <property name="ant.version" value="Apache Ant(TM) version 1.9.3 compiled on April 8 2014" />
+
+          <property name="TSTAMP" value="1325" />
+
+          <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
+
+          <property name="ant.file.type" value="file" />
+
+          <property name="java.vm.specification.version" value="1.7" />
+
+          <property name="junit.jar" value="/opt/local/lib/junit-4.11.jar" />
+
+          <property name="sun.cpu.endian" value="little" />
+
+          <property name="sun.os.patch.level" value="unknown" />
+
+          <property name="junit.reports.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/reports" />
+
+          <property name="ant.file.type.PDS" value="file" />
+
+          <property name="java.io.tmpdir" value="/tmp" />
+
+          <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/" />
+
+          <property name="properties.file" value="build_default.properties" />
+
+          <property name="os.arch" value="amd64" />
+
+          <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment" />
+
+          <property name="java.ext.dirs" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext:/usr/java/packages/lib/ext" />
+
+          <property name="user.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk" />
+
+          <property name="vlcj.jar" value="/opt/local/lib/vlcj-3.0.0.jar" />
+
+          <property name="libdir" value="/opt/local/lib" />
+
+          <property name="line.separator" value="&#xa;" />
+
+          <property name="java.vm.name" value="OpenJDK 64-Bit Server VM" />
+
+          <property name="test.bin.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin-test" />
+
+          <property name="junit.data.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/data" />
+
+          <property name="basedir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk" />
+
+          <property name="root" value="/opt/local/lib" />
+
+          <property name="ant.java.version" value="1.7" />
+
+          <property name="ant.core.lib" value="/usr/share/ant/lib/ant.jar" />
+
+          <property name="file.encoding" value="UTF-8" />
+
+          <property name="jacoco.jar" value="/opt/local/lib/jacoco/lib/jacocoant.jar" />
+
+          <property name="java.specification.version" value="1.7" />
+
+          <property name="src.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/src" />
+
+          <property name="ant.project.invoked-targets" value="all" />
+
+          <property name="javadoc.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/javadoc" />
+
+          <property name="jar-path" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/PDS.jar" />
+
+      </properties>
+
+      <testcase classname="pds.cvSvc.LinesTest" name="testRun" time="0.673" />
+
+      <testcase classname="pds.cvSvc.LinesTest" name="testLines" time="0.009" />
+
+      <system-out />
+
+      <system-err><![CDATA[java.lang.NullPointerException
+	at pds.cvSvc.LinesTest.testRun(LinesTest.java:84)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at junit.framework.JUnit4TestAdapter.run(JUnit4TestAdapter.java:38)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:532)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.launch(JUnitTestRunner.java:1165)
+	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.main(JUnitTestRunner.java:988)
+]]></system-err>
+
+  </testsuite>
+  <testsuite errors="2" failures="2" hostname="cisc475-2" id="6" name="MovingBallDetectedTest" package="pds.sitAnalyze" skipped="0" tests="5" time="0.055" timestamp="2014-12-02T18:25:51">
+      <properties>
+          <property name="java.vendor" value="Oracle Corporation" />
+
+          <property name="hamcrest.jar" value="/opt/local/lib/hamcrest-core-1.3.jar" />
+
+          <property name="sun.java.launcher" value="SUN_STANDARD" />
+
+          <property name="jna.platform" value="/opt/local/lib/jna-platform-4.0.0.jar" />
+
+          <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers" />
+
+          <property name="os.name" value="Linux" />
+
+          <property name="sun.boot.class.path" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/resources.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jsse.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jce.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/charsets.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/netx.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/plugin.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rhino.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jfr.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/classes" />
+
+          <property name="TODAY" value="December 2 2014" />
+
+          <property name="jar-name" value="PDS.jar" />
+
+          <property name="java.vm.specification.vendor" value="Oracle Corporation" />
+
+          <property name="ant.home" value="/usr/share/ant" />
+
+          <property name="java.runtime.version" value="1.7.0_55-b14" />
+
+          <property name="user.name" value="cguinnup" />
+
+          <property name="user.language" value="en" />
+
+          <property name="sun.boot.library.path" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64" />
+
+          <property name="ant.project.default-target" value="all" />
+
+          <property name="ant.project.name" value="PDS" />
+
+          <property name="DSTAMP" value="20141202" />
+
+          <property name="java.version" value="1.7.0_55" />
+
+          <property name="user.timezone" value="" />
+
+          <property name="sun.arch.data.model" value="64" />
+
+          <property name="test.src.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/test" />
+
+          <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/endorsed" />
+
+          <property name="sun.cpu.isalist" value="" />
+
+          <property name="sun.jnu.encoding" value="UTF-8" />
+
+          <property name="file.encoding.pkg" value="sun.io" />
+
+          <property name="file.separator" value="/" />
+
+          <property name="java.specification.name" value="Java Platform API Specification" />
+
+          <property name="java.class.version" value="51.0" />
+
+          <property name="user.country" value="US" />
+
+          <property name="ant.file.PDS" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/build.xml" />
+
+          <property name="java.home" value="/usr/lib/jvm/java-7-openjdk-amd64/jre" />
+
+          <property name="java.vm.info" value="mixed mode" />
+
+          <property name="main-class" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/src/PDSMain.java" />
+
+          <property name="ant.file" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/build.xml" />
+
+          <property name="os.version" value="3.13.0-34-generic" />
+
+          <property name="opencv.jar" value="/opt/local/lib/opencv-2410.jar" />
+
+          <property name="path.separator" value=":" />
+
+          <property name="java.vm.version" value="24.51-b03" />
+
+          <property name="jna.jar" value="/opt/local/lib/jna-4.0.0.jar" />
+
+          <property name="ant.library.dir" value="/usr/share/ant/lib" />
+
+          <property name="java.awt.printerjob" value="sun.print.PSPrinterJob" />
+
+          <property name="sun.io.unicode.encoding" value="UnicodeLittle" />
+
+          <property name="awt.toolkit" value="sun.awt.X11.XToolkit" />
+
+          <property name="_jacoco.agentFile" value="/tmp/jacocoagent8720312422921614156.jar" />
+
+          <property name="coverage.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/coverage" />
+
+          <property name="user.home" value="/usa/cguinnup" />
+
+          <property name="java.specification.vendor" value="Oracle Corporation" />
+
+          <property name="junit.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit" />
+
+          <property name="java.library.path" value="/opt/local/lib" />
+
+          <property name="java.vendor.url" value="http://java.oracle.com/" />
+
+          <property name="bin.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin" />
+
+          <property name="java.vm.vendor" value="Oracle Corporation" />
+
+          <property name="java.runtime.name" value="OpenJDK Runtime Environment" />
+
+          <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner testsfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junittestcases3485251318768657405.properties skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=false outputtoformatters=true logfailedtests=true logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/data/IGNORETHIS.xml crashfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junitvmwatcher4443578690425769119.properties propsfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit3059755455683264835.properties" />
+
+          <property name="java.class.path" value="/opt/local/lib/vlcj-3.0.0.jar:/opt/local/lib/jna-4.0.0.jar:/opt/local/lib/jna-platform-4.0.0.jar:/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin-test:/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin:/opt/local/lib/junit-4.11.jar:/opt/local/lib/hamcrest-core-1.3.jar:/opt/local/lib/opencv-2410.jar:/usr/share/ant/lib/junit.jar:/usr/share/java/ant-launcher-1.9.3.jar:/usr/share/ant/lib/ant.jar:/usr/share/ant/lib/ant-junit.jar:/usr/share/ant/lib/ant-junit4.jar:/tmp/jacocoagent8720312422921614156.jar" />
+
+          <property name="ant.version" value="Apache Ant(TM) version 1.9.3 compiled on April 8 2014" />
+
+          <property name="TSTAMP" value="1325" />
+
+          <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
+
+          <property name="ant.file.type" value="file" />
+
+          <property name="java.vm.specification.version" value="1.7" />
+
+          <property name="junit.jar" value="/opt/local/lib/junit-4.11.jar" />
+
+          <property name="sun.cpu.endian" value="little" />
+
+          <property name="sun.os.patch.level" value="unknown" />
+
+          <property name="junit.reports.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/reports" />
+
+          <property name="ant.file.type.PDS" value="file" />
+
+          <property name="java.io.tmpdir" value="/tmp" />
+
+          <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/" />
+
+          <property name="properties.file" value="build_default.properties" />
+
+          <property name="os.arch" value="amd64" />
+
+          <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment" />
+
+          <property name="java.ext.dirs" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext:/usr/java/packages/lib/ext" />
+
+          <property name="user.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk" />
+
+          <property name="vlcj.jar" value="/opt/local/lib/vlcj-3.0.0.jar" />
+
+          <property name="libdir" value="/opt/local/lib" />
+
+          <property name="line.separator" value="&#xa;" />
+
+          <property name="java.vm.name" value="OpenJDK 64-Bit Server VM" />
+
+          <property name="test.bin.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin-test" />
+
+          <property name="junit.data.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/data" />
+
+          <property name="basedir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk" />
+
+          <property name="root" value="/opt/local/lib" />
+
+          <property name="ant.java.version" value="1.7" />
+
+          <property name="ant.core.lib" value="/usr/share/ant/lib/ant.jar" />
+
+          <property name="file.encoding" value="UTF-8" />
+
+          <property name="jacoco.jar" value="/opt/local/lib/jacoco/lib/jacocoant.jar" />
+
+          <property name="java.specification.version" value="1.7" />
+
+          <property name="src.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/src" />
+
+          <property name="ant.project.invoked-targets" value="all" />
+
+          <property name="javadoc.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/javadoc" />
+
+          <property name="jar-path" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/PDS.jar" />
+
+      </properties>
+
+      <testcase classname="pds.sitAnalyze.MovingBallDetectedTest" name="movingBallDetected_StraightLineTest" time="0.013">
+          <error type="java.lang.NullPointerException">java.lang.NullPointerException
+	at pds.cvSvc.MatDisplay.updateResult(MatDisplay.java:87)
+	at pds.cvSvc.MatDisplay.showText(MatDisplay.java:147)
+	at pds.sitAnalyze.AggregateStatus.movingBallDetected(AggregateStatus.java:342)
+	at pds.sitAnalyze.MovingBallDetectedTest.movingBallDetected_StraightLineTest(MovingBallDetectedTest.java:45)
+</error>
+
+      </testcase>
+
+      <testcase classname="pds.sitAnalyze.MovingBallDetectedTest" name="movingBallDetected_MultiplePerFrameTest" time="0.006">
+          <error type="java.lang.NullPointerException">java.lang.NullPointerException
+	at pds.cvSvc.MatDisplay.updateResult(MatDisplay.java:87)
+	at pds.cvSvc.MatDisplay.showText(MatDisplay.java:147)
+	at pds.sitAnalyze.AggregateStatus.movingBallDetected(AggregateStatus.java:342)
+	at pds.sitAnalyze.MovingBallDetectedTest.movingBallDetected_MultiplePerFrameTest(MovingBallDetectedTest.java:85)
+</error>
+
+      </testcase>
+
+      <testcase classname="pds.sitAnalyze.MovingBallDetectedTest" name="movingBallDetected_JustNoiseTest" time="0.001" />
+
+      <testcase classname="pds.sitAnalyze.MovingBallDetectedTest" name="movingBallDetected_SkipFramesTest" time="0.003">
+          <failure type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError
+	at pds.sitAnalyze.MovingBallDetectedTest.movingBallDetected_SkipFramesTest(MovingBallDetectedTest.java:63)
+</failure>
+
+      </testcase>
+
+      <testcase classname="pds.sitAnalyze.MovingBallDetectedTest" name="movingBallDetected_SkippedAndMultipleTest" time="0.004">
+          <failure type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError
+	at pds.sitAnalyze.MovingBallDetectedTest.movingBallDetected_SkippedAndMultipleTest(MovingBallDetectedTest.java:109)
+</failure>
+
+      </testcase>
+
+      <system-out />
+
+      <system-err />
+
+  </testsuite>
+  <testsuite errors="0" failures="0" hostname="cisc475-2" id="7" name="ConsoleInputTest" package="test" skipped="0" tests="3" time="2.629" timestamp="2014-12-02T18:25:51">
+      <properties>
+          <property name="java.vendor" value="Oracle Corporation" />
+
+          <property name="hamcrest.jar" value="/opt/local/lib/hamcrest-core-1.3.jar" />
+
+          <property name="sun.java.launcher" value="SUN_STANDARD" />
+
+          <property name="jna.platform" value="/opt/local/lib/jna-platform-4.0.0.jar" />
+
+          <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers" />
+
+          <property name="os.name" value="Linux" />
+
+          <property name="sun.boot.class.path" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/resources.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jsse.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jce.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/charsets.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/netx.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/plugin.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rhino.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jfr.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/classes" />
+
+          <property name="TODAY" value="December 2 2014" />
+
+          <property name="jar-name" value="PDS.jar" />
+
+          <property name="java.vm.specification.vendor" value="Oracle Corporation" />
+
+          <property name="ant.home" value="/usr/share/ant" />
+
+          <property name="java.runtime.version" value="1.7.0_55-b14" />
+
+          <property name="user.name" value="cguinnup" />
+
+          <property name="user.language" value="en" />
+
+          <property name="sun.boot.library.path" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64" />
+
+          <property name="ant.project.default-target" value="all" />
+
+          <property name="ant.project.name" value="PDS" />
+
+          <property name="DSTAMP" value="20141202" />
+
+          <property name="java.version" value="1.7.0_55" />
+
+          <property name="user.timezone" value="" />
+
+          <property name="sun.arch.data.model" value="64" />
+
+          <property name="test.src.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/test" />
+
+          <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/endorsed" />
+
+          <property name="sun.cpu.isalist" value="" />
+
+          <property name="sun.jnu.encoding" value="UTF-8" />
+
+          <property name="file.encoding.pkg" value="sun.io" />
+
+          <property name="file.separator" value="/" />
+
+          <property name="java.specification.name" value="Java Platform API Specification" />
+
+          <property name="java.class.version" value="51.0" />
+
+          <property name="user.country" value="US" />
+
+          <property name="ant.file.PDS" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/build.xml" />
+
+          <property name="java.home" value="/usr/lib/jvm/java-7-openjdk-amd64/jre" />
+
+          <property name="java.vm.info" value="mixed mode" />
+
+          <property name="main-class" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/src/PDSMain.java" />
+
+          <property name="ant.file" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/build.xml" />
+
+          <property name="os.version" value="3.13.0-34-generic" />
+
+          <property name="opencv.jar" value="/opt/local/lib/opencv-2410.jar" />
+
+          <property name="path.separator" value=":" />
+
+          <property name="java.vm.version" value="24.51-b03" />
+
+          <property name="jna.jar" value="/opt/local/lib/jna-4.0.0.jar" />
+
+          <property name="ant.library.dir" value="/usr/share/ant/lib" />
+
+          <property name="java.awt.printerjob" value="sun.print.PSPrinterJob" />
+
+          <property name="sun.io.unicode.encoding" value="UnicodeLittle" />
+
+          <property name="awt.toolkit" value="sun.awt.X11.XToolkit" />
+
+          <property name="_jacoco.agentFile" value="/tmp/jacocoagent8720312422921614156.jar" />
+
+          <property name="coverage.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/coverage" />
+
+          <property name="user.home" value="/usa/cguinnup" />
+
+          <property name="java.specification.vendor" value="Oracle Corporation" />
+
+          <property name="junit.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit" />
+
+          <property name="java.library.path" value="/opt/local/lib" />
+
+          <property name="java.vendor.url" value="http://java.oracle.com/" />
+
+          <property name="bin.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin" />
+
+          <property name="java.vm.vendor" value="Oracle Corporation" />
+
+          <property name="java.runtime.name" value="OpenJDK Runtime Environment" />
+
+          <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner testsfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junittestcases3485251318768657405.properties skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=false outputtoformatters=true logfailedtests=true logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/data/IGNORETHIS.xml crashfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junitvmwatcher4443578690425769119.properties propsfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit3059755455683264835.properties" />
+
+          <property name="java.class.path" value="/opt/local/lib/vlcj-3.0.0.jar:/opt/local/lib/jna-4.0.0.jar:/opt/local/lib/jna-platform-4.0.0.jar:/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin-test:/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin:/opt/local/lib/junit-4.11.jar:/opt/local/lib/hamcrest-core-1.3.jar:/opt/local/lib/opencv-2410.jar:/usr/share/ant/lib/junit.jar:/usr/share/java/ant-launcher-1.9.3.jar:/usr/share/ant/lib/ant.jar:/usr/share/ant/lib/ant-junit.jar:/usr/share/ant/lib/ant-junit4.jar:/tmp/jacocoagent8720312422921614156.jar" />
+
+          <property name="ant.version" value="Apache Ant(TM) version 1.9.3 compiled on April 8 2014" />
+
+          <property name="TSTAMP" value="1325" />
+
+          <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
+
+          <property name="ant.file.type" value="file" />
+
+          <property name="java.vm.specification.version" value="1.7" />
+
+          <property name="junit.jar" value="/opt/local/lib/junit-4.11.jar" />
+
+          <property name="sun.cpu.endian" value="little" />
+
+          <property name="sun.os.patch.level" value="unknown" />
+
+          <property name="junit.reports.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/reports" />
+
+          <property name="ant.file.type.PDS" value="file" />
+
+          <property name="java.io.tmpdir" value="/tmp" />
+
+          <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/" />
+
+          <property name="properties.file" value="build_default.properties" />
+
+          <property name="os.arch" value="amd64" />
+
+          <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment" />
+
+          <property name="java.ext.dirs" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext:/usr/java/packages/lib/ext" />
+
+          <property name="user.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk" />
+
+          <property name="vlcj.jar" value="/opt/local/lib/vlcj-3.0.0.jar" />
+
+          <property name="libdir" value="/opt/local/lib" />
+
+          <property name="line.separator" value="&#xa;" />
+
+          <property name="java.vm.name" value="OpenJDK 64-Bit Server VM" />
+
+          <property name="test.bin.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin-test" />
+
+          <property name="junit.data.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/data" />
+
+          <property name="basedir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk" />
+
+          <property name="root" value="/opt/local/lib" />
+
+          <property name="ant.java.version" value="1.7" />
+
+          <property name="ant.core.lib" value="/usr/share/ant/lib/ant.jar" />
+
+          <property name="file.encoding" value="UTF-8" />
+
+          <property name="jacoco.jar" value="/opt/local/lib/jacoco/lib/jacocoant.jar" />
+
+          <property name="java.specification.version" value="1.7" />
+
+          <property name="src.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/src" />
+
+          <property name="ant.project.invoked-targets" value="all" />
+
+          <property name="javadoc.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/javadoc" />
+
+          <property name="jar-path" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/PDS.jar" />
+
+      </properties>
+
+      <testcase classname="test.ConsoleInputTest" name="wrongInputTest" time="1.202" />
+
+      <testcase classname="test.ConsoleInputTest" name="nullInputTest" time="1.201" />
+
+      <testcase classname="test.ConsoleInputTest" name="quitInputTest" time="0.201" />
+
+      <system-out />
+
+      <system-err />
+
+  </testsuite>
+  <testsuite errors="0" failures="0" hostname="cisc475-2" id="8" name="ConsoleOutputTest" package="test" skipped="0" tests="5" time="0.13" timestamp="2014-12-02T18:25:54">
+      <properties>
+          <property name="java.vendor" value="Oracle Corporation" />
+
+          <property name="hamcrest.jar" value="/opt/local/lib/hamcrest-core-1.3.jar" />
+
+          <property name="sun.java.launcher" value="SUN_STANDARD" />
+
+          <property name="jna.platform" value="/opt/local/lib/jna-platform-4.0.0.jar" />
+
+          <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers" />
+
+          <property name="os.name" value="Linux" />
+
+          <property name="sun.boot.class.path" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/resources.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jsse.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jce.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/charsets.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/netx.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/plugin.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rhino.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jfr.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/classes" />
+
+          <property name="TODAY" value="December 2 2014" />
+
+          <property name="jar-name" value="PDS.jar" />
+
+          <property name="java.vm.specification.vendor" value="Oracle Corporation" />
+
+          <property name="ant.home" value="/usr/share/ant" />
+
+          <property name="java.runtime.version" value="1.7.0_55-b14" />
+
+          <property name="user.name" value="cguinnup" />
+
+          <property name="user.language" value="en" />
+
+          <property name="sun.boot.library.path" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64" />
+
+          <property name="ant.project.default-target" value="all" />
+
+          <property name="ant.project.name" value="PDS" />
+
+          <property name="DSTAMP" value="20141202" />
+
+          <property name="java.version" value="1.7.0_55" />
+
+          <property name="user.timezone" value="" />
+
+          <property name="sun.arch.data.model" value="64" />
+
+          <property name="test.src.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/test" />
+
+          <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/endorsed" />
+
+          <property name="sun.cpu.isalist" value="" />
+
+          <property name="sun.jnu.encoding" value="UTF-8" />
+
+          <property name="file.encoding.pkg" value="sun.io" />
+
+          <property name="file.separator" value="/" />
+
+          <property name="java.specification.name" value="Java Platform API Specification" />
+
+          <property name="java.class.version" value="51.0" />
+
+          <property name="user.country" value="US" />
+
+          <property name="ant.file.PDS" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/build.xml" />
+
+          <property name="java.home" value="/usr/lib/jvm/java-7-openjdk-amd64/jre" />
+
+          <property name="java.vm.info" value="mixed mode" />
+
+          <property name="main-class" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/src/PDSMain.java" />
+
+          <property name="ant.file" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/build.xml" />
+
+          <property name="os.version" value="3.13.0-34-generic" />
+
+          <property name="opencv.jar" value="/opt/local/lib/opencv-2410.jar" />
+
+          <property name="path.separator" value=":" />
+
+          <property name="java.vm.version" value="24.51-b03" />
+
+          <property name="jna.jar" value="/opt/local/lib/jna-4.0.0.jar" />
+
+          <property name="ant.library.dir" value="/usr/share/ant/lib" />
+
+          <property name="java.awt.printerjob" value="sun.print.PSPrinterJob" />
+
+          <property name="sun.io.unicode.encoding" value="UnicodeLittle" />
+
+          <property name="awt.toolkit" value="sun.awt.X11.XToolkit" />
+
+          <property name="_jacoco.agentFile" value="/tmp/jacocoagent8720312422921614156.jar" />
+
+          <property name="coverage.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/coverage" />
+
+          <property name="user.home" value="/usa/cguinnup" />
+
+          <property name="java.specification.vendor" value="Oracle Corporation" />
+
+          <property name="junit.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit" />
+
+          <property name="java.library.path" value="/opt/local/lib" />
+
+          <property name="java.vendor.url" value="http://java.oracle.com/" />
+
+          <property name="bin.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin" />
+
+          <property name="java.vm.vendor" value="Oracle Corporation" />
+
+          <property name="java.runtime.name" value="OpenJDK Runtime Environment" />
+
+          <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner testsfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junittestcases3485251318768657405.properties skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=false outputtoformatters=true logfailedtests=true logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/data/IGNORETHIS.xml crashfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junitvmwatcher4443578690425769119.properties propsfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit3059755455683264835.properties" />
+
+          <property name="java.class.path" value="/opt/local/lib/vlcj-3.0.0.jar:/opt/local/lib/jna-4.0.0.jar:/opt/local/lib/jna-platform-4.0.0.jar:/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin-test:/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin:/opt/local/lib/junit-4.11.jar:/opt/local/lib/hamcrest-core-1.3.jar:/opt/local/lib/opencv-2410.jar:/usr/share/ant/lib/junit.jar:/usr/share/java/ant-launcher-1.9.3.jar:/usr/share/ant/lib/ant.jar:/usr/share/ant/lib/ant-junit.jar:/usr/share/ant/lib/ant-junit4.jar:/tmp/jacocoagent8720312422921614156.jar" />
+
+          <property name="ant.version" value="Apache Ant(TM) version 1.9.3 compiled on April 8 2014" />
+
+          <property name="TSTAMP" value="1325" />
+
+          <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
+
+          <property name="ant.file.type" value="file" />
+
+          <property name="java.vm.specification.version" value="1.7" />
+
+          <property name="junit.jar" value="/opt/local/lib/junit-4.11.jar" />
+
+          <property name="sun.cpu.endian" value="little" />
+
+          <property name="sun.os.patch.level" value="unknown" />
+
+          <property name="junit.reports.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/reports" />
+
+          <property name="ant.file.type.PDS" value="file" />
+
+          <property name="java.io.tmpdir" value="/tmp" />
+
+          <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/" />
+
+          <property name="properties.file" value="build_default.properties" />
+
+          <property name="os.arch" value="amd64" />
+
+          <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment" />
+
+          <property name="java.ext.dirs" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext:/usr/java/packages/lib/ext" />
+
+          <property name="user.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk" />
+
+          <property name="vlcj.jar" value="/opt/local/lib/vlcj-3.0.0.jar" />
+
+          <property name="libdir" value="/opt/local/lib" />
+
+          <property name="line.separator" value="&#xa;" />
+
+          <property name="java.vm.name" value="OpenJDK 64-Bit Server VM" />
+
+          <property name="test.bin.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin-test" />
+
+          <property name="junit.data.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/data" />
+
+          <property name="basedir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk" />
+
+          <property name="root" value="/opt/local/lib" />
+
+          <property name="ant.java.version" value="1.7" />
+
+          <property name="ant.core.lib" value="/usr/share/ant/lib/ant.jar" />
+
+          <property name="file.encoding" value="UTF-8" />
+
+          <property name="jacoco.jar" value="/opt/local/lib/jacoco/lib/jacocoant.jar" />
+
+          <property name="java.specification.version" value="1.7" />
+
+          <property name="src.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/src" />
+
+          <property name="ant.project.invoked-targets" value="all" />
+
+          <property name="javadoc.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/javadoc" />
+
+          <property name="jar-path" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/PDS.jar" />
+
+      </properties>
+
+      <testcase classname="test.ConsoleOutputTest" name="noTableOutputTest" time="0.005" />
+
+      <testcase classname="test.ConsoleOutputTest" name="freeOutputTest" time="0.001" />
+
+      <testcase classname="test.ConsoleOutputTest" name="InUseOutputTest" time="0.0" />
+
+      <testcase classname="test.ConsoleOutputTest" name="cameraErrourOutputTest" time="0.001" />
+
+      <testcase classname="test.ConsoleOutputTest" name="timestampTest" time="0.101" />
+
+      <system-out />
+
+      <system-err />
+
+  </testsuite>
+  <testsuite errors="0" failures="1" hostname="cisc475-2" id="9" name="VideoSvcTest" package="test.videoSvc" skipped="0" tests="1" time="0.016" timestamp="2014-12-02T18:25:54">
+      <properties>
+          <property name="java.vendor" value="Oracle Corporation" />
+
+          <property name="hamcrest.jar" value="/opt/local/lib/hamcrest-core-1.3.jar" />
+
+          <property name="sun.java.launcher" value="SUN_STANDARD" />
+
+          <property name="jna.platform" value="/opt/local/lib/jna-platform-4.0.0.jar" />
+
+          <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers" />
+
+          <property name="os.name" value="Linux" />
+
+          <property name="sun.boot.class.path" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/resources.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jsse.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jce.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/charsets.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/netx.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/plugin.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rhino.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jfr.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/classes" />
+
+          <property name="TODAY" value="December 2 2014" />
+
+          <property name="jar-name" value="PDS.jar" />
+
+          <property name="java.vm.specification.vendor" value="Oracle Corporation" />
+
+          <property name="ant.home" value="/usr/share/ant" />
+
+          <property name="java.runtime.version" value="1.7.0_55-b14" />
+
+          <property name="user.name" value="cguinnup" />
+
+          <property name="user.language" value="en" />
+
+          <property name="sun.boot.library.path" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64" />
+
+          <property name="ant.project.default-target" value="all" />
+
+          <property name="ant.project.name" value="PDS" />
+
+          <property name="DSTAMP" value="20141202" />
+
+          <property name="java.version" value="1.7.0_55" />
+
+          <property name="user.timezone" value="" />
+
+          <property name="sun.arch.data.model" value="64" />
+
+          <property name="test.src.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/test" />
+
+          <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/endorsed" />
+
+          <property name="sun.cpu.isalist" value="" />
+
+          <property name="sun.jnu.encoding" value="UTF-8" />
+
+          <property name="file.encoding.pkg" value="sun.io" />
+
+          <property name="file.separator" value="/" />
+
+          <property name="java.specification.name" value="Java Platform API Specification" />
+
+          <property name="java.class.version" value="51.0" />
+
+          <property name="user.country" value="US" />
+
+          <property name="ant.file.PDS" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/build.xml" />
+
+          <property name="java.home" value="/usr/lib/jvm/java-7-openjdk-amd64/jre" />
+
+          <property name="java.vm.info" value="mixed mode" />
+
+          <property name="main-class" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/src/PDSMain.java" />
+
+          <property name="ant.file" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/build.xml" />
+
+          <property name="os.version" value="3.13.0-34-generic" />
+
+          <property name="opencv.jar" value="/opt/local/lib/opencv-2410.jar" />
+
+          <property name="path.separator" value=":" />
+
+          <property name="java.vm.version" value="24.51-b03" />
+
+          <property name="jna.jar" value="/opt/local/lib/jna-4.0.0.jar" />
+
+          <property name="ant.library.dir" value="/usr/share/ant/lib" />
+
+          <property name="java.awt.printerjob" value="sun.print.PSPrinterJob" />
+
+          <property name="sun.io.unicode.encoding" value="UnicodeLittle" />
+
+          <property name="awt.toolkit" value="sun.awt.X11.XToolkit" />
+
+          <property name="_jacoco.agentFile" value="/tmp/jacocoagent8720312422921614156.jar" />
+
+          <property name="coverage.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/coverage" />
+
+          <property name="user.home" value="/usa/cguinnup" />
+
+          <property name="java.specification.vendor" value="Oracle Corporation" />
+
+          <property name="junit.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit" />
+
+          <property name="java.library.path" value="/opt/local/lib" />
+
+          <property name="java.vendor.url" value="http://java.oracle.com/" />
+
+          <property name="bin.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin" />
+
+          <property name="java.vm.vendor" value="Oracle Corporation" />
+
+          <property name="java.runtime.name" value="OpenJDK Runtime Environment" />
+
+          <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner testsfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junittestcases3485251318768657405.properties skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=false outputtoformatters=true logfailedtests=true logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/data/IGNORETHIS.xml crashfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junitvmwatcher4443578690425769119.properties propsfile=/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit3059755455683264835.properties" />
+
+          <property name="java.class.path" value="/opt/local/lib/vlcj-3.0.0.jar:/opt/local/lib/jna-4.0.0.jar:/opt/local/lib/jna-platform-4.0.0.jar:/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin-test:/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin:/opt/local/lib/junit-4.11.jar:/opt/local/lib/hamcrest-core-1.3.jar:/opt/local/lib/opencv-2410.jar:/usr/share/ant/lib/junit.jar:/usr/share/java/ant-launcher-1.9.3.jar:/usr/share/ant/lib/ant.jar:/usr/share/ant/lib/ant-junit.jar:/usr/share/ant/lib/ant-junit4.jar:/tmp/jacocoagent8720312422921614156.jar" />
+
+          <property name="ant.version" value="Apache Ant(TM) version 1.9.3 compiled on April 8 2014" />
+
+          <property name="TSTAMP" value="1325" />
+
+          <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
+
+          <property name="ant.file.type" value="file" />
+
+          <property name="java.vm.specification.version" value="1.7" />
+
+          <property name="junit.jar" value="/opt/local/lib/junit-4.11.jar" />
+
+          <property name="sun.cpu.endian" value="little" />
+
+          <property name="sun.os.patch.level" value="unknown" />
+
+          <property name="junit.reports.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/reports" />
+
+          <property name="ant.file.type.PDS" value="file" />
+
+          <property name="java.io.tmpdir" value="/tmp" />
+
+          <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/" />
+
+          <property name="properties.file" value="build_default.properties" />
+
+          <property name="os.arch" value="amd64" />
+
+          <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment" />
+
+          <property name="java.ext.dirs" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext:/usr/java/packages/lib/ext" />
+
+          <property name="user.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk" />
+
+          <property name="vlcj.jar" value="/opt/local/lib/vlcj-3.0.0.jar" />
+
+          <property name="libdir" value="/opt/local/lib" />
+
+          <property name="line.separator" value="&#xa;" />
+
+          <property name="java.vm.name" value="OpenJDK 64-Bit Server VM" />
+
+          <property name="test.bin.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/bin-test" />
+
+          <property name="junit.data.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/junit/data" />
+
+          <property name="basedir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk" />
+
+          <property name="root" value="/opt/local/lib" />
+
+          <property name="ant.java.version" value="1.7" />
+
+          <property name="ant.core.lib" value="/usr/share/ant/lib/ant.jar" />
+
+          <property name="file.encoding" value="UTF-8" />
+
+          <property name="jacoco.jar" value="/opt/local/lib/jacoco/lib/jacocoant.jar" />
+
+          <property name="java.specification.version" value="1.7" />
+
+          <property name="src.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/src" />
+
+          <property name="ant.project.invoked-targets" value="all" />
+
+          <property name="javadoc.dir" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/javadoc" />
+
+          <property name="jar-path" value="/eecis/nfs.acad/home/cguinnup/twistpong/trunk/PDS.jar" />
+
+      </properties>
+
+      <testcase classname="test.videoSvc.VideoSvcTest" name="testFrameStore" time="0.004">
+          <failure type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError
+	at test.videoSvc.VideoSvcTest.testFrameStore(VideoSvcTest.java:25)
+</failure>
+
+      </testcase>
+
+      <system-out />
+
+      <system-err />
+
+  </testsuite>
+</testsuites>

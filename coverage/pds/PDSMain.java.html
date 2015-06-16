@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PDSMain.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Test Coverage Report of 1325, December 2 2014 for Revision ${revision}</a> &gt; <a href="index.html" class="el_package">pds</a> &gt; <span class="el_source">PDSMain.java</span></div><h1>PDSMain.java</h1><pre class="source lang-java linenums">package pds;
+
+import pds.cvSvc.CVFrame;
+import pds.cvSvc.CVStores;
+import pds.cvSvc.DetectBall;
+import pds.cvSvc.DetectTable;
+import pds.cvSvc.DiffMotion;
+import pds.cvSvc.Lines;
+import pds.cvSvc.MatDisplay;
+import pds.input.ConsoleInput;
+import pds.output.ConsoleOutput;
+import static pds.sitAnalyze.AggregateStore.GameStatus.InUse;
+import pds.sitAnalyze.AggregateStatus;
+import pds.sitAnalyze.ImmediateStatus;
+import pds.sitAnalyze.StatusStores;
+import pds.videoSvc.FrameNode;
+import pds.videoSvc.FrameStore;
+import pds.videoSvc.VLCJVideoSvc;
+import pds.videoSvc.VideoSvcIF;
+
+import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+/**
+ * Contains the main program loop
+ * @author Christopher Guinnup, contributions from Sam Nixon
+ */
+<span class="nc" id="L34">public class PDSMain {</span>
+
+	protected static VideoSvcIF videoSvc;
+	protected static FrameStore frameStore;
+	protected static CVStores cvStores;
+	protected static StatusStores statusStores;
+	protected static ConsoleInput in;
+	protected static ConsoleOutput out;
+	
+	protected static AtomicBoolean runStatus;
+	protected static CVFrame currentFrame;
+	
+	// for manual testing &amp; debugging
+<span class="fc" id="L47">	public static final MatDisplay statisticWindow = new MatDisplay(</span>
+			&quot;Aggregate Statistics&quot;, MatDisplay.DEFAULT_WIDTH+18, 0);
+<span class="fc" id="L49">	public static String[] displayStrings = </span>
+			new String[] { &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot; };
+	
+	// constants
+	protected static final int MAX_THREADS = 8;
+	protected static final int RECHECK_PAUSE = 1000/(30*4); // in milliseconds (30 fps)
+	
+	protected static final int ALL_JOBS = 3;
+	protected static final int NO_TABLE_JOBS = 2;
+
+	/** 
+	 * Initializes the program then starts the program loop.
+	 */
+	public static void main(final String[] args) throws InterruptedException {
+<span class="fc" id="L63">		out = new ConsoleOutput();</span>
+		
+<span class="pc bpc" id="L65" title="2 of 4 branches missed.">		if (args != null &amp;&amp; args.length &gt; 0) {</span>
+			try {
+<span class="nc" id="L67">				initialize(args);</span>
+<span class="nc" id="L68">				programLoop();</span>
+			}
+<span class="nc" id="L70">			catch (FileNotFoundException e) {</span>
+<span class="nc" id="L71">				e.printStackTrace();</span>
+<span class="nc" id="L72">				out.error(&quot;Could not decode the input file! Please specify a good media file location.&quot;);</span>
+<span class="nc" id="L73">				return;</span>
+<span class="nc" id="L74">			}</span>
+		}
+		else {
+<span class="nc" id="L77">			out.error(&quot;Please run PDS with arguments for media location and the vlclib.dll path!&quot;);</span>
+<span class="nc" id="L78">			return;</span>
+		}
+<span class="nc" id="L80">	}</span>
+	
+	
+	/**
+	 * The main program loop.  Responsible for launching image-processing &amp; analysis threads.
+	 */
+	protected static void programLoop() throws InterruptedException {
+<span class="fc" id="L87">		ExecutorService e = Executors.newFixedThreadPool(MAX_THREADS);</span>
+<span class="fc" id="L88">		CountDownLatch youShallNotPass = null;</span>
+		CVFrame previousFrame;
+		// for manual video testing
+<span class="fc" id="L91">		MatDisplay display = new MatDisplay(&quot;Racket Display&quot;);</span>
+<span class="fc" id="L92">		long frameLastPrinted = 0;</span>
+<span class="fc" id="L93">		List&lt;Long&gt; framesSkipped = new ArrayList&lt;Long&gt;();</span>
+		
+		// Check for frame &amp; do first frame grab
+<span class="fc" id="L96">		previousFrame = CVFrame.make(frameStore.getFrame());</span>
+<span class="pc bpc" id="L97" title="1 of 2 branches missed.">		while (previousFrame == null) {</span>
+<span class="nc" id="L98">			Thread.sleep(RECHECK_PAUSE);</span>
+<span class="nc" id="L99">			previousFrame = CVFrame.make(frameStore.getFrame());</span>
+		}
+		
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">		while (runStatus.get()) {</span>
+			
+			// Grab frame, if not there then loop checking for it  
+<span class="fc" id="L105">			currentFrame = CVFrame.make(frameStore.getFrame());</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">			while (currentFrame == null) {</span>
+<span class="nc" id="L107">				Thread.sleep(RECHECK_PAUSE);</span>
+<span class="nc" id="L108">				currentFrame = CVFrame.make(frameStore.getFrame());</span>
+			}
+<span class="nc" id="L110">			display.showRacketCandidates(currentFrame);</span>
+			// sanity check
+			//if (currentFrame.getFrameNumber()%10 == 0)
+			//	System.out.println(&quot;frame &quot;+currentFrame.getFrameNumber());
+			
+			// process frame based on high-level situation 
+<span class="nc bnc" id="L116" title="All 3 branches missed.">			switch(statusStores.aggStore.getGameStatus())</span>
+			{
+			case InUse:
+			case Free:
+			case Start:
+				// check for all objects &amp; indicators
+<span class="nc" id="L122">				youShallNotPass = new CountDownLatch(ALL_JOBS);</span>
+<span class="nc" id="L123">				e.execute( new DiffMotion(previousFrame, currentFrame, cvStores.diffStore, youShallNotPass));</span>
+<span class="nc" id="L124">				e.execute( new DetectTable(currentFrame, cvStores.tableStore, youShallNotPass));</span>
+<span class="nc" id="L125">				e.execute( new DetectBall(previousFrame, currentFrame, cvStores.ballStore, youShallNotPass));</span>
+<span class="nc" id="L126">				break;</span>
+			case NoTable:
+			case CameraError:
+				// check for both table &amp; for camera error
+<span class="nc" id="L130">				youShallNotPass = new CountDownLatch(NO_TABLE_JOBS);</span>
+<span class="nc" id="L131">				e.execute(new DetectTable(currentFrame, cvStores.tableStore, youShallNotPass));</span>
+<span class="nc" id="L132">				e.execute( new DetectBall(previousFrame, currentFrame, cvStores.ballStore, youShallNotPass));</span>
+				//cvStores.ballStore.skipJob(currentFrame.getFrameNumber());
+<span class="nc" id="L134">				cvStores.diffStore.skipJob(currentFrame.getFrameNumber());</span>
+				//TODO: check for camera error
+<span class="nc" id="L136">				break;</span>
+			default:
+<span class="nc" id="L138">				 out.error(&quot;Main loop switch: Unexpected enum!&quot;);</span>
+<span class="nc" id="L139">				 System.exit(-1);</span>
+			}
+			
+			// Wait until cvLib jobs done.  Then run status analysis (w/o blocking the fetching &amp; processing of next frame).
+<span class="nc" id="L143">			youShallNotPass.await();</span>
+<span class="nc" id="L144">			e.execute( new ImmediateStatus(currentFrame.getFrameNumber(), cvStores, statusStores) );</span>
+			//System.out.println(&quot;Frames skipped: &quot;+(currentFrame.getFrameNumber()-previousFrame.getFrameNumber()-1));
+			
+			// for manual video test statistics
+<span class="nc" id="L148">			framesSkipped.add(currentFrame.getFrameNumber() - previousFrame.getFrameNumber()-1);</span>
+<span class="nc bnc" id="L149" title="All 2 branches missed.">			if (currentFrame.getFrameNumber() - frameLastPrinted &gt;= 60) {</span>
+<span class="nc" id="L150">				double sumFramesSkipped = 0.0;</span>
+<span class="nc bnc" id="L151" title="All 2 branches missed.">				for (long a: framesSkipped) {</span>
+<span class="nc" id="L152">					sumFramesSkipped += a;</span>
+<span class="nc" id="L153">				}</span>
+<span class="nc" id="L154">				displayStrings[12] = &quot;Skipped Frames&quot;;</span>
+<span class="nc" id="L155">				displayStrings[13] = new DecimalFormat(&quot;#0.0&quot;).format(100.0*sumFramesSkipped</span>
+						/(currentFrame.getFrameNumber() - frameLastPrinted)) + &quot;%&quot;;
+<span class="nc" id="L157">				statisticWindow.showText(displayStrings);</span>
+<span class="nc" id="L158">				frameLastPrinted = currentFrame.getFrameNumber();</span>
+<span class="nc" id="L159">				framesSkipped.clear();</span>
+			}
+			
+			// prepare for next loop
+<span class="nc" id="L163">			previousFrame = currentFrame;</span>
+		}
+<span class="nc" id="L165">	}</span>
+
+	
+	/**
+	 * Performs program initialization
+	 * @param args Command-line arguments 
+	 */
+	private static void initialize(final String [] args) throws FileNotFoundException {
+<span class="nc" id="L173">		videoSvc = VLCJVideoSvc.createVideoSvc(args);</span>
+<span class="nc" id="L174">		frameStore = videoSvc.getStorage();</span>
+<span class="nc" id="L175">		runStatus = new AtomicBoolean(true);</span>
+<span class="nc" id="L176">		in = new ConsoleInput(runStatus);</span>
+<span class="nc" id="L177">		statusStores = new StatusStores();</span>
+<span class="nc" id="L178">		AggregateStatus.initConsoleOutput(out);</span>
+<span class="nc" id="L179">		cvStores = new CVStores();</span>
+<span class="nc" id="L180">		in.start();</span>
+<span class="nc" id="L181">		videoSvc.startVideoSvc();</span>
+<span class="nc" id="L182">	}</span>
+	
+
+	/**
+	 *  Signals program shut down - for JUnit testing 
+	 */
+	public static void shutDown() {
+<span class="nc" id="L189">		runStatus.set(false);</span>
+<span class="nc" id="L190">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.3.20130409-1102</span></div></body></html>

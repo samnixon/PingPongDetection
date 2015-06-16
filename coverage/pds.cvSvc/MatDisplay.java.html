@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MatDisplay.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Test Coverage Report of 1325, December 2 2014 for Revision ${revision}</a> &gt; <a href="index.html" class="el_package">pds.cvSvc</a> &gt; <span class="el_source">MatDisplay.java</span></div><h1>MatDisplay.java</h1><pre class="source lang-java linenums">package pds.cvSvc;
+
+import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+import org.opencv.core.Core;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfByte;
+import org.opencv.core.MatOfPoint;
+import org.opencv.core.MatOfPoint2f;
+import org.opencv.core.Point;
+import org.opencv.core.Rect;
+import org.opencv.core.RotatedRect;
+import org.opencv.core.Scalar;
+import org.opencv.core.Size;
+import org.opencv.highgui.Highgui;
+import org.opencv.imgproc.Imgproc;
+import org.opencv.imgproc.Moments;
+
+import pds.videoSvc.FrameNode;
+
+/**
+ * Provides a means to easily display OpenCV Mats
+ * @author Sam Nixon
+ *
+ */
+public class MatDisplay {
+	private JFrame frame;
+	//Thanks to user 'mar' of StackOverflow for the bulk of this class
+	//http://stackoverflow.com/questions/16494916/equivalent-method-for-imshow-in-opencv-java-build
+
+	public static final int DEFAULT_WIDTH = 640;
+	public static final int DEFAULT_HEIGHT = 360;
+	
+	/**
+	 * Creates a JFrame to display any input image, at the desired x,y location.  
+	 * Exit button will free up resources but will not shut down the entire program.
+	 */
+<span class="fc" id="L51">	public MatDisplay(String title, int x, int y) {</span>
+		try {
+<span class="nc" id="L53">			frame = new JFrame(title);</span>
+<span class="nc" id="L54">			frame.getContentPane().add(new JLabel(new ImageIcon(new BufferedImage(5, 5, 5))), 0);</span>
+<span class="nc" id="L55">			frame.pack();</span>
+<span class="nc" id="L56">			frame.setVisible(true);</span>
+<span class="nc" id="L57">			frame.setSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));</span>
+<span class="nc" id="L58">			frame.setResizable(true);</span>
+<span class="nc" id="L59">			frame.setLocation(x, y);</span>
+<span class="nc" id="L60">			frame.addWindowListener(new WindowAdapter() {</span>
+				@Override
+				public void windowClosing(WindowEvent evt) {
+<span class="nc" id="L63">					frame.dispose();</span>
+<span class="nc" id="L64">				}</span>
+			});
+<span class="fc" id="L66">		} catch (Exception e) {</span>
+<span class="fc" id="L67">			e.printStackTrace();</span>
+<span class="nc" id="L68">		}</span>
+<span class="fc" id="L69">	}</span>
+
+	
+	/**
+	 * Creates a JFrame to display any input image. Location defaults to (0,0).
+	 * @param title Title of the window
+	 */
+	public MatDisplay(String title) {
+<span class="fc" id="L77">		this(title, 0, 0);</span>
+<span class="fc" id="L78">	}</span>
+
+	
+	/**
+	 * Removes the previous Mat from the display and adds the input in its place
+	 * @param img  Image to show
+	 */
+	public void updateResult(Mat img) {
+<span class="nc" id="L86">		Mat scaled = new Mat();</span>
+<span class="nc" id="L87">		Imgproc.resize(img, scaled, new Size(frame.getSize().getWidth(), frame.getSize().getHeight()));</span>
+<span class="nc" id="L88">		MatOfByte matOfByte = new MatOfByte();</span>
+
+<span class="nc" id="L90">		Highgui.imencode(&quot;.jpg&quot;, img, matOfByte);</span>
+<span class="nc" id="L91">		byte[] byteArray = matOfByte.toArray();</span>
+<span class="nc" id="L92">		BufferedImage bufImage = null;</span>
+		try {
+<span class="nc" id="L94">			InputStream in = new ByteArrayInputStream(byteArray);</span>
+<span class="nc" id="L95">			bufImage = ImageIO.read(in);</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">			if (frame.getContentPane().getComponentCount() &gt; 0)</span>
+<span class="nc" id="L97">				frame.getContentPane().remove(0);</span>
+<span class="nc" id="L98">			frame.getContentPane().add(new JLabel(new ImageIcon(bufImage)), 0);</span>
+<span class="nc" id="L99">			frame.pack();</span>
+<span class="nc" id="L100">		} catch (Exception e) {</span>
+<span class="nc" id="L101">			e.printStackTrace();</span>
+<span class="nc" id="L102">		}</span>
+<span class="nc" id="L103">	}</span>
+
+
+	/**
+	 * Creates a matrix that represents the difference between the two input FrameNodes.
+	 * This is down through a difference filter and subsequent edge detection. This method
+	 * calls updateResult.
+	 */
+	public void displayDifference(CVFrame previousFrame, CVFrame currentFrame){
+<span class="nc" id="L112">		Mat converted1 = previousFrame.getData();</span>
+<span class="nc" id="L113">		Mat converted2 = currentFrame.getData();</span>
+<span class="nc" id="L114">		Mat dif = new Mat();</span>
+<span class="nc" id="L115">		Mat edges = new Mat();</span>
+<span class="nc" id="L116">		Core.subtract(converted2, converted1, converted2);</span>
+<span class="nc" id="L117">		Core.multiply(converted2, new Scalar(3), converted2);</span>
+<span class="nc" id="L118">		Imgproc.threshold(converted2, dif, 100, 255, Imgproc.THRESH_TOZERO);</span>
+<span class="nc" id="L119">		Imgproc.Canny(dif, edges, 100, 255);</span>
+<span class="nc" id="L120">		updateResult(edges);</span>
+<span class="nc" id="L121">	}</span>
+	
+	public void showRacketCandidates(CVFrame currentFrame){
+<span class="fc" id="L124">		Mat image = currentFrame.getData();</span>
+<span class="fc" id="L125">		List&lt;MatOfPoint&gt; toDraw = ExtractObjectCandidates.getRacketCandidates(image);</span>
+		
+<span class="fc" id="L127">		Mat result = Mat.zeros(image.size(), CvType.CV_8UC3);</span>
+<span class="fc" id="L128">		Imgproc.drawContours(result, toDraw, -1, new Scalar(0, 255, 0));</span>
+<span class="pc bnc" id="L129" title="All 2 branches missed.">		for (MatOfPoint mp : toDraw){</span>
+<span class="nc" id="L130">			Rect r = Imgproc.boundingRect(mp);</span>
+			
+<span class="nc" id="L132">			Core.rectangle(result, r.br(), r.tl(), new Scalar(255, 0 ,0 ));</span>
+<span class="nc" id="L133">		}</span>
+<span class="nc" id="L134">		updateResult(result);</span>
+<span class="nc" id="L135">	}</span>
+
+
+
+
+	public void showText(String[] text){
+<span class="fc" id="L141">		Mat m = Mat.zeros(640, 360, CvType.CV_8UC3);</span>
+<span class="fc" id="L142">		int offset = 20;</span>
+<span class="pc bpc" id="L143" title="1 of 2 branches missed.">		for (String s : text){</span>
+<span class="fc" id="L144">				Core.putText(m, s, new Point (20, offset += 20), </span>
+			Core.FONT_HERSHEY_SIMPLEX, .5, new Scalar(0,0,255));
+		}
+<span class="nc" id="L147">		updateResult(m);</span>
+<span class="nc" id="L148">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.3.20130409-1102</span></div></body></html>

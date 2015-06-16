@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AggregateStore.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Test Coverage Report of 1325, December 2 2014 for Revision ${revision}</a> &gt; <a href="index.html" class="el_package">pds.sitAnalyze</a> &gt; <span class="el_source">AggregateStore.java</span></div><h1>AggregateStore.java</h1><pre class="source lang-java linenums">package pds.sitAnalyze;
+
+/**
+ * A data structure which stores the final game status and 
+ * any last occurrences of each status type.
+ * @author Chris Guinnup
+ *
+ */
+public class AggregateStore {
+	public static final long NONE = -1;
+<span class="pc" id="L11">	public enum GameStatus { InUse, Free, NoTable, CameraError, Start }</span>
+	
+	private GameStatus lastStatus;
+	private long statusFrame[];
+	private long potentialBallEvent;
+	
+	/**
+	 * Initializes the data structures
+	 */
+<span class="fc" id="L20">	public AggregateStore() {</span>
+<span class="fc" id="L21">		int length = GameStatus.values().length;</span>
+<span class="fc" id="L22">		statusFrame = new long[length];</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">		for (int i=0; i&lt;length; i++) { </span>
+<span class="fc" id="L24">			statusFrame[i] = NONE;</span>
+		}
+<span class="fc" id="L26">		lastStatus = GameStatus.Start;</span>
+		//potentialNewEvent = NONE;
+<span class="fc" id="L28">	}</span>
+	
+	
+	/**
+	 * Gets the current game status
+	 * @return Current game status
+	 */
+	public GameStatus getGameStatus() {
+<span class="nc" id="L36">		return lastStatus;</span>
+	}
+	
+	
+	/**
+	 * Retrieves the most recent frame number at which a given status occurred.
+	 * @param status Status sought 
+	 * @return The frame number
+	 */
+	public long getStatusFrameNum(GameStatus status) {
+<span class="nc" id="L46">		return statusFrame[status.ordinal()];</span>
+	}
+		
+	
+	/**
+	 * Records the fact that a certain game status occurred at a particular frame number.
+	 */
+	public void setStatus(GameStatus status, long frameNum) {
+<span class="nc" id="L54">		lastStatus = status;</span>
+<span class="nc" id="L55">		statusFrame[status.ordinal()] = frameNum;</span>
+<span class="nc" id="L56">	}</span>
+
+	
+	/**
+	 * Gets the last frame number of a potential ball event
+	 */
+	public long potentialBallEventAt() {
+<span class="nc" id="L63">		return potentialBallEvent;</span>
+	}
+
+	/**
+	 * Stores that a potential-ball was detected, so that the rest of the program can respond appropriately
+	 * @param frameNum Frame number at which the potential-ball detection occurred
+	 */
+	protected void setPotentialBallEvent(long frameNum) {
+<span class="nc" id="L71">		potentialBallEvent = frameNum;</span>
+<span class="nc" id="L72">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.3.20130409-1102</span></div></body></html>

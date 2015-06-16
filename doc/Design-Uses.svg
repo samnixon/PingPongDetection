@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="34cm" height="25cm" viewBox="198 78 663 484" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <rect style="fill: #ffffff" x="400" y="400" width="160" height="160"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="400" y="400" width="160" height="160"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="480" y="484.8">
+      <tspan x="480" y="484.8">sitAnalyze</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="591" y="401" width="269" height="160"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="591" y="401" width="269" height="160"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="725.5" y="485.8">
+      <tspan x="725.5" y="485.8">cvStores</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="200" y="80" width="160" height="160"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="200" y="80" width="160" height="160"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="280" y="164.8">
+      <tspan x="280" y="164.8">videoSvc</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="220" y="180" width="120" height="44.5"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="220" y="180" width="120" height="44.5"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="280" y="207.05">
+      <tspan x="280" y="207.05">FrameStore</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="620" y="420" width="100" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="620" y="420" width="100" height="40"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="670" y="444.8">
+      <tspan x="670" y="444.8">TableStore</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="680" y="500" width="100" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="680" y="500" width="100" height="40"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="730" y="524.8">
+      <tspan x="730" y="524.8">DiffStore</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="420" y="420" width="118.15" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="420" y="420" width="118.15" height="40"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="479.075" y="444.8">
+      <tspan x="479.075" y="444.8">ImmediateStatus</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="420" y="500" width="115.4" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="420" y="500" width="115.4" height="40"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="477.7" y="524.8">
+      <tspan x="477.7" y="524.8">AggregateStatus</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="220" y="100" width="120" height="44"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="220" y="100" width="120" height="44"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="280" y="126.8">
+      <tspan x="280" y="126.8">VLCHooks</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="200" y="400" width="160" height="160.75"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="200" y="400" width="160" height="160.75"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="280" y="485.175">
+      <tspan x="280" y="485.175">input / output</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="220" y="500" width="120" height="46"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="220" y="500" width="120" height="46"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="280" y="527.8">
+      <tspan x="280" y="527.8">ConsoleOutput</tspan>
+    </text>
+  </g>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="617" y1="28.5" x2="617" y2="28.5"/>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="480" y1="160" x2="369.736" y2="160"/>
+    <polygon style="fill: #000000" points="362.236,160 372.236,155 369.736,160 372.236,165 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="362.236,160 372.236,155 369.736,160 372.236,165 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="369.736" y1="480.284" x2="400" y2="480"/>
+    <polygon style="fill: #000000" points="362.236,480.354 372.189,475.261 369.736,480.284 372.282,485.26 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="362.236,480.354 372.189,475.261 369.736,480.284 372.282,485.26 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="529.982" y1="491.91" x2="508.612" y2="460"/>
+    <polygon style="fill: #000000" points="534.156,498.142 524.437,492.615 529.982,491.91 532.746,487.051 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="534.156,498.142 524.437,492.615 529.982,491.91 532.746,487.051 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="310" y1="144" x2="333.767" y2="172.521"/>
+    <polygon style="fill: #000000" points="338.569,178.282 328.326,173.801 333.767,172.521 336.008,167.399 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="338.569,178.282 328.326,173.801 333.767,172.521 336.008,167.399 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="480" y="80" width="380" height="160"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="480" y="80" width="380" height="160"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="670" y="164.8">
+      <tspan x="670" y="164.8">cvSvc</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="560" y1="480" x2="581.269" y2="480.686"/>
+    <polygon style="fill: #000000" points="588.765,480.928 578.609,485.603 581.269,480.686 578.931,475.608 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="588.765,480.928 578.609,485.603 581.269,480.686 578.931,475.608 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="500" y="100" width="100" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="500" y="100" width="100" height="40"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="550" y="124.8">
+      <tspan x="550" y="124.8">DiffMotion</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="740" y="100" width="100" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="740" y="100" width="100" height="40"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="790" y="124.8">
+      <tspan x="790" y="124.8">DetectTable</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="500" y="180" width="140" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="500" y="180" width="140" height="40"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="570" y="204.8">
+      <tspan x="570" y="204.8">ConvertFrameNode</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="360" y="280" width="118.5" height="81.1"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="360" y="280" width="118.5" height="81.1"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="419.25" y="325.35">
+      <tspan x="419.25" y="325.35">PDSMain</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="419.25" y1="361.1" x2="435.418" y2="391.41"/>
+    <polygon style="fill: #000000" points="438.948,398.027 429.83,391.557 435.418,391.41 438.653,386.851 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="438.948,398.027 429.83,391.557 435.418,391.41 438.653,386.851 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="419.25" y1="280" x2="368.069" y2="245.448"/>
+    <polygon style="fill: #000000" points="361.853,241.251 372.939,242.702 368.069,245.448 367.344,250.991 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="361.853,241.251 372.939,242.702 368.069,245.448 367.344,250.991 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="419.25" y1="280" x2="471.868" y2="245.354"/>
+    <polygon style="fill: #000000" points="478.132,241.23 472.53,250.905 471.868,245.354 467.031,242.553 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="478.132,241.23 472.53,250.905 471.868,245.354 467.031,242.553 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="688.651" y1="240.99" x2="723.315" y2="391.512"/>
+    <polygon style="fill: #000000" points="724.998,398.821 717.882,390.198 723.315,391.512 727.626,387.954 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="724.998,398.821 717.882,390.198 723.315,391.512 727.626,387.954 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="620" y="100" width="100" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="620" y="100" width="100" height="40"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="670" y="124.8">
+      <tspan x="670" y="124.8">DetectBall</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="660" y="180" width="83.35" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="660" y="180" width="83.35" height="40"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="701.675" y="204.8">
+      <tspan x="701.675" y="204.8">MatDisplay</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="760" y="180" width="80" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="760" y="180" width="80" height="40"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="800" y="204.8">
+      <tspan x="800" y="204.8">CVFrame</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="740" y="420" width="100" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="740" y="420" width="100" height="40"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="790" y="444.8">
+      <tspan x="790" y="444.8">BallStore</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="220" y="420" width="120" height="46"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="220" y="420" width="120" height="46"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="280" y="447.8">
+      <tspan x="280" y="447.8">ConsoleInput</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="419.25" y1="361.1" x2="368.139" y2="394.657"/>
+    <polygon style="fill: #000000" points="361.869,398.773 367.484,389.105 368.139,394.657 372.973,397.464 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="361.869,398.773 367.484,389.105 368.139,394.657 372.973,397.464 "/>
+  </g>
+</svg>

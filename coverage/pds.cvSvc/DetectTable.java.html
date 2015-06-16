@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DetectTable.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Test Coverage Report of 1325, December 2 2014 for Revision ${revision}</a> &gt; <a href="index.html" class="el_package">pds.cvSvc</a> &gt; <span class="el_source">DetectTable.java</span></div><h1>DetectTable.java</h1><pre class="source lang-java linenums">package pds.cvSvc;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.concurrent.CountDownLatch;
+
+import org.opencv.core.Core;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
+import org.opencv.core.MatOfPoint2f;
+import org.opencv.core.Point;
+import org.opencv.core.RotatedRect;
+import org.opencv.core.Scalar;
+import org.opencv.core.Size;
+import org.opencv.imgproc.Imgproc;
+
+/**
+ * Determines whether or not enough of a ping pong table is in view for further
+ * analysis
+ * @author Sam Nixon
+ *
+ */
+public class DetectTable implements Runnable{
+	
+	private final TableStore tableStore;
+	private final CountDownLatch latch;
+	private final CVFrame currentFrame;
+<span class="nc" id="L29">	private final static MatDisplay display = new MatDisplay(&quot;Table&quot;, MatDisplay.DEFAULT_WIDTH/2 + 16, MatDisplay.DEFAULT_HEIGHT+32);</span>
+	
+<span class="nc" id="L31">	public DetectTable(CVFrame currentFrame, TableStore tableStore, CountDownLatch latch){</span>
+<span class="nc" id="L32">		this.currentFrame = currentFrame;</span>
+<span class="nc" id="L33">		this.latch = latch;</span>
+<span class="nc" id="L34">		this.tableStore = tableStore;</span>
+<span class="nc" id="L35">	}</span>
+
+	/**
+	 * 
+	 * @param grayscale: a grayscale image
+	 * @return  A downsized Binary Mat with noise reduction and edge detection
+	 */
+	private Mat edgeDetection(Mat grayscale){
+<span class="nc" id="L43">		Mat gray = grayscale.clone();</span>
+<span class="nc" id="L44">		Imgproc.blur(gray, gray, new Size(2,2));</span>
+<span class="nc" id="L45">		Imgproc.dilate(gray, gray, Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(15,15)), new Point(-1,-1), 3);</span>
+<span class="nc" id="L46">		Imgproc.threshold(gray, gray, 200, 255, Imgproc.THRESH_BINARY);</span>
+<span class="nc" id="L47">		Imgproc.pyrDown(gray, gray, new Size(gray.size().width/2, gray.size().height/2));</span>
+<span class="nc" id="L48">		Core.subtract(gray, new Scalar(80), gray);</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">		for (int i = 0; i &lt; 10; i++){</span>
+<span class="nc" id="L50">			Core.multiply(gray, new Scalar(1.02), gray);</span>
+		}
+<span class="nc" id="L52">		Mat edges = new Mat();</span>
+<span class="nc" id="L53">		Imgproc.Canny(gray, edges, 0, 255 );</span>
+<span class="nc" id="L54">		Imgproc.dilate(edges,  edges, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(5,5)), new Point(-1,-1),2);</span>
+<span class="nc" id="L55">		return edges;</span>
+	}
+	
+	/**
+	 * Takes as input a grayscale image and inverts the colors. Does not modify
+	 * original.
+	 */
+	private Mat invertImage(Mat input){
+
+<span class="nc" id="L64">		Mat result = Mat.ones(input.size(), CvType.CV_8U);</span>
+<span class="nc" id="L65">		Core.multiply(result, new Scalar(255), result);</span>
+<span class="nc" id="L66">		Core.subtract(result, input, result );</span>
+<span class="nc" id="L67">		return result;</span>
+	}
+	
+	/**
+	 * Runs various filters and edge detections to determine whether a ping pong
+	 * table is in view
+	 */
+	@Override
+	public void run() {
+<span class="nc" id="L76">		Mat gray = currentFrame.getData();</span>
+<span class="nc" id="L77">		Mat edges = edgeDetection(gray);</span>
+<span class="nc" id="L78">		Mat inverseEdges = invertImage(edges);</span>
+		
+<span class="nc" id="L80">		ArrayList&lt;MatOfPoint&gt; contours = new ArrayList&lt;MatOfPoint&gt;();</span>
+<span class="nc" id="L81">		ArrayList&lt;MatOfPoint&gt; toDraw = new ArrayList&lt;MatOfPoint&gt;();</span>
+<span class="nc" id="L82">		ArrayList&lt;MatOfPoint2f&gt; approxPolygons = new ArrayList&lt;MatOfPoint2f&gt;();</span>
+<span class="nc" id="L83">		Imgproc.findContours(inverseEdges.clone(), contours, new Mat(), </span>
+				Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE);
+<span class="nc bnc" id="L85" title="All 2 branches missed.">		for (int i = 0; i &lt; contours.size(); i++){</span>
+<span class="nc" id="L86">			MatOfPoint2f approxCurve = new MatOfPoint2f();</span>
+<span class="nc" id="L87">			MatOfPoint2f  temp = new MatOfPoint2f();</span>
+<span class="nc" id="L88">			contours.get(i).convertTo(temp, CvType.CV_32F);</span>
+<span class="nc" id="L89">			Imgproc.approxPolyDP(temp, approxCurve,</span>
+					Imgproc.arcLength(temp, true)*.05, true);
+			
+<span class="nc" id="L92">			int numEdges = approxCurve.toList().size();</span>
+<span class="nc" id="L93">			Size rotatedRectSize = Imgproc.minAreaRect(approxCurve).size;</span>
+<span class="nc" id="L94">			int rotatedRectArea = (int) ((rotatedRectSize.width)*(rotatedRectSize.height));</span>
+<span class="nc bnc" id="L95" title="All 6 branches missed.">			if (numEdges &lt; 6 &amp;&amp; numEdges &gt; 3 &amp;&amp; rotatedRectArea&gt; 5000){	</span>
+<span class="nc" id="L96">				toDraw.add(contours.get(i));</span>
+<span class="nc" id="L97">				approxPolygons.add(approxCurve);</span>
+			}
+		}
+		
+<span class="nc" id="L101">		tableStore.addResult(currentFrame.getFrameNumber(), approxPolygons);</span>
+<span class="nc" id="L102">		latch.countDown();</span>
+
+<span class="nc" id="L104">		display.updateResult(edges);</span>
+<span class="nc" id="L105">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.3.20130409-1102</span></div></body></html>

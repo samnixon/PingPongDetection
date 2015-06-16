@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CVFrame.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Test Coverage Report of 1325, December 2 2014 for Revision ${revision}</a> &gt; <a href="index.html" class="el_package">pds.cvSvc</a> &gt; <span class="el_source">CVFrame.java</span></div><h1>CVFrame.java</h1><pre class="source lang-java linenums">package pds.cvSvc;
+
+import org.opencv.core.Mat;
+import org.opencv.core.Size;
+import org.opencv.imgproc.Imgproc;
+
+import pds.videoSvc.FrameNode;
+/**
+ * 
+ * Immutable class that allows for single conversion of a VLCJ FrameNode
+ * to a CVFrame for use with OpenCV
+ * @author Sam Nixon
+ *
+ */
+public final class CVFrame {
+	
+	private final Mat data;
+	private final Mat smallData;
+	private final long frameNumber;
+	private final Size dimensions;
+	
+	public static CVFrame make(FrameNode frame){
+<span class="pc bpc" id="L23" title="1 of 2 branches missed.">		return frame != null ? new CVFrame(frame) : null;</span>
+	}
+	
+<span class="fc" id="L26">	private CVFrame(FrameNode frame){</span>
+<span class="fc" id="L27">		Mat temp = new Mat();</span>
+<span class="fc" id="L28">		this.data = ConvertFrameNode.cvtFrameNode2CV_GRAY(frame);</span>
+<span class="fc" id="L29">		this.frameNumber = frame.getFrameNumber();</span>
+<span class="fc" id="L30">		this.dimensions = data.size();</span>
+<span class="fc" id="L31">		Imgproc.pyrDown(this.data, temp);</span>
+<span class="fc" id="L32">		this.smallData = temp;</span>
+<span class="fc" id="L33">	}</span>
+	
+	/**
+	 * @return A copy of the Mat contained within this class.
+	 */
+	public Mat getData(){
+<span class="fc" id="L39">		return data.clone();</span>
+	}
+	
+	/**
+	 * @return A copy of the Mat screen data, half-size on each axis.
+	 */
+	public Mat getSmallData() {
+<span class="nc" id="L46">		return smallData.clone();</span>
+	}
+	
+	/**
+	 * @return Frame number of the FrameNode that this class was made from
+	 */
+	public long getFrameNumber(){
+<span class="fc" id="L53">		return frameNumber;</span>
+	}
+	
+	/**
+	 * An OpenCV Size denoting the dimensions of the Mat data
+	 * @return
+	 */
+	public Size getDimensions(){
+<span class="fc" id="L61">		return dimensions;</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.3.20130409-1102</span></div></body></html>

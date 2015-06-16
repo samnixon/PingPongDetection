@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>VLCHooks.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Test Coverage Report of 1325, December 2 2014 for Revision ${revision}</a> &gt; <a href="index.html" class="el_package">pds.videoSvc</a> &gt; <span class="el_source">VLCHooks.java</span></div><h1>VLCHooks.java</h1><pre class="source lang-java linenums">package pds.videoSvc;
+
+import java.awt.AlphaComposite;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
+import java.awt.RenderingHints;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.StringWriter;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+
+
+
+
+
+
+
+
+
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+import com.sun.jna.Native;
+import com.sun.jna.NativeLibrary;
+
+import uk.co.caprica.vlcj.binding.LibVlc;
+import uk.co.caprica.vlcj.player.MediaPlayerFactory;
+import uk.co.caprica.vlcj.player.direct.BufferFormat;
+import uk.co.caprica.vlcj.player.direct.BufferFormatCallback;
+import uk.co.caprica.vlcj.player.direct.DirectMediaPlayer;
+import uk.co.caprica.vlcj.player.direct.RenderCallbackAdapter;
+import uk.co.caprica.vlcj.player.direct.format.RV32BufferFormat;
+import uk.co.caprica.vlcj.runtime.RuntimeUtil;
+
+/**
+ * Starts a video player that stores every individual frame in its FrameStore
+ * Created based heavily on TestDirectPlayer, an example of how to properly implement the
+ * uk.co.caprica.vlcj.player.Direct.DirectPlayer
+ * @author Sam Nixon
+ *
+ */
+public class VLCHooks {
+
+<span class="fc" id="L64">	private long startTime = System.currentTimeMillis();</span>
+
+	private final BufferedImage image;
+	
+	private ImagePane imagePane;
+
+	private final MediaPlayerFactory factory;
+	private final DirectMediaPlayer mediaPlayer;
+<span class="fc" id="L72">	int width = 640;</span>
+<span class="fc" id="L73">	int height = 360;</span>
+	private String media;
+<span class="fc" id="L75">	private FrameStore storage = new FrameStore(height, width);</span>
+	
+<span class="fc" id="L77">	public VLCHooks(String media, String[] args) throws InvocationTargetException, InterruptedException{</span>
+		
+<span class="fc" id="L79">		this.media = media;</span>
+<span class="fc" id="L80">		loadVLClibrary(args);</span>
+		
+<span class="pc bpc" id="L82" title="2 of 4 branches missed.">		if (GraphicsEnvironment.getLocalGraphicsEnvironment() != null &amp;&amp; GraphicsEnvironment.isHeadless() == false) {</span>
+			//System.out.println(&quot;HEADLESS ENVIRONMENT = FALSE&quot;);//debug
+<span class="nc" id="L84">			image = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().</span>
+					  getDefaultConfiguration().createCompatibleImage(width, height);
+		}
+		else {
+<span class="fc" id="L88">			System.out.println(&quot;HEADLESS ENVIRONMENT = TRUE&quot;);//debug</span>
+<span class="fc" id="L89">			image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);</span>
+		}
+	
+<span class="pc" id="L92">		SwingUtilities.invokeAndWait(new Runnable() {</span>
+			@Override
+			public void run() {
+<span class="nc" id="L95">				JFrame frame = new JFrame(&quot;VLCJ&quot;);</span>
+
+<span class="nc" id="L97">				imagePane = new ImagePane(image);</span>
+<span class="nc" id="L98">				imagePane.setSize(width, height);</span>
+<span class="nc" id="L99">				imagePane.setMinimumSize(new Dimension(width, height));</span>
+<span class="nc" id="L100">				imagePane.setPreferredSize(new Dimension(width, height));</span>
+<span class="nc" id="L101">				frame.getContentPane().setLayout(new BorderLayout());</span>
+<span class="nc" id="L102">				frame.getContentPane().add(imagePane, BorderLayout.CENTER);</span>
+<span class="nc" id="L103">				frame.pack();</span>
+<span class="nc" id="L104">				frame.setResizable(false);</span>
+<span class="nc" id="L105">				frame.setVisible(true);</span>
+<span class="nc" id="L106">				frame.addWindowListener(new WindowAdapter() {</span>
+					@Override
+					public void windowClosing(WindowEvent evt) {
+<span class="nc" id="L109">						mediaPlayer.release();</span>
+<span class="nc" id="L110">						factory.release();</span>
+<span class="nc" id="L111">						System.exit(0);</span>
+<span class="nc" id="L112">					}</span>
+				});
+<span class="nc" id="L114">			}</span>
+		});
+		
+<span class="nc" id="L117">		factory = new MediaPlayerFactory(args);</span>
+<span class="nc" id="L118">		mediaPlayer = factory.newDirectMediaPlayer(new TestBufferFormatCallback(), new InterceptRender());</span>
+<span class="nc" id="L119">	}</span>
+	
+	public void start() throws FileNotFoundException {
+<span class="nc" id="L122">		boolean success = mediaPlayer.startMedia(media);</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">		if (!success) {</span>
+<span class="nc" id="L124">			throw new FileNotFoundException(&quot;VLC will not play!&quot;);</span>
+		}
+<span class="nc" id="L126">	}</span>
+	
+	
+	private void loadVLClibrary() throws IOException {
+<span class="nc" id="L130">		String os = System.getProperty(&quot;os.name&quot;);</span>
+<span class="nc bnc" id="L131" title="All 2 branches missed.">		if (os.contains(&quot;Windows&quot;)) {</span>
+<span class="nc" id="L132">			final String vlcRegistryLocation = &quot;HKLM\\Software\\VideoLAN\\VLC\\&quot;;</span>
+<span class="nc" id="L133">			final String vlcRegistryKey = &quot;InstallDir&quot;;</span>
+			String output;
+			
+<span class="nc" id="L136">			Process registryProcess = Runtime.getRuntime().exec(&quot;reg query \&quot;&quot;  </span>
+					+ vlcRegistryLocation + &quot;\&quot; /v &quot; + vlcRegistryKey);
+<span class="nc" id="L138">			output = readRegistry(registryProcess.getInputStream());</span>
+			
+			
+<span class="nc bnc" id="L141" title="All 2 branches missed.">			if (output.contains(&quot;\t&quot;)) {</span>
+				
+			}
+<span class="nc bnc" id="L144" title="All 2 branches missed.">			else if (output.contains(&quot;    &quot;)) {</span>
+				
+			}
+			else {
+<span class="nc" id="L148">				System.err.println(&quot;Registry reading: output is not as expected!&quot;);</span>
+			}
+<span class="nc" id="L150">		}</span>
+<span class="nc bnc" id="L151" title="All 2 branches missed.">		else if (os.contains(&quot;Linux&quot;)) {</span>
+			
+		}
+<span class="nc" id="L154">	}</span>
+	
+	private String readRegistry(InputStream in) {
+<span class="nc" id="L157">		StringWriter stringWriter = new StringWriter();</span>
+		try {
+			int charAsInt;
+<span class="nc bnc" id="L160" title="All 2 branches missed.">			while ((charAsInt = in.read()) != -1) {</span>
+<span class="nc" id="L161">				stringWriter.write( charAsInt );</span>
+			}
+		}
+<span class="nc" id="L164">		catch (IOException e) {</span>
+<span class="nc" id="L165">			System.err.println(&quot;Failure reading registry:&quot;);</span>
+<span class="nc" id="L166">			e.printStackTrace();</span>
+<span class="nc" id="L167">		}</span>
+<span class="nc" id="L168">		return stringWriter.toString();</span>
+	}
+	
+	
+	/***
+	 * Loads the VLC library files based on passed
+	 * @param args Arguments sent with the program call
+	 */
+	private void loadVLClibrary(String args[]){
+<span class="pc bpc" id="L177" title="1 of 2 branches missed.">		if (args.length == 2) {</span>
+<span class="nc" id="L178">			NativeLibrary.addSearchPath(</span>
+	                RuntimeUtil.getLibVlcLibraryName(), args[1]
+	            );
+<span class="nc" id="L181">	        Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);</span>
+		}
+		else {
+<span class="fc" id="L184">			System.err.println(&quot;Warning: Please specify the path to vlclib.dll\n&quot;);</span>
+		}
+<span class="fc" id="L186">	}</span>
+	
+	public FrameStore getStorage(){
+<span class="nc" id="L189">		return storage;</span>
+	}
+
+	/*
+	 * Standard JPanel setup
+	 */
+	@SuppressWarnings(&quot;serial&quot;)
+	private final class ImagePane extends JPanel {
+		private final BufferedImage image;
+<span class="nc" id="L198">		public ImagePane(BufferedImage image) {</span>
+<span class="nc" id="L199">			this.image = image;</span>
+<span class="nc" id="L200">		}</span>
+		@Override
+		public void paint(Graphics g) {
+<span class="nc" id="L203">			Graphics2D g2 = (Graphics2D)g;</span>
+<span class="nc" id="L204">			g2.drawImage(image, null, 0, 0);</span>
+			// You could draw on top of the image here...
+			
+<span class="nc" id="L207">		}</span>
+	}
+
+	/**
+	 * On each frame render, the frame is added to storage
+	 */
+	private final class InterceptRender extends RenderCallbackAdapter {
+<span class="nc" id="L214">		public InterceptRender() {</span>
+<span class="nc" id="L215">			super(((DataBufferInt) image.getRaster().getDataBuffer()).getData());</span>
+<span class="nc" id="L216">		}</span>
+		
+		@Override
+		public void onDisplay(DirectMediaPlayer mediaPlayer, int[] data) {
+			
+<span class="nc" id="L221">			int[] tempData = new int[data.length];</span>
+<span class="nc bnc" id="L222" title="All 2 branches missed.">			for (int i = 0; i &lt; data.length; i++){</span>
+<span class="nc" id="L223">				tempData[i] = data[i];</span>
+			}
+			try {
+<span class="nc" id="L226">				storage.putFrame(tempData);</span>
+<span class="nc" id="L227">			} catch (Exception e) {</span>
+<span class="nc" id="L228">				e.printStackTrace();</span>
+<span class="nc" id="L229">			}</span>
+			
+			
+<span class="nc" id="L232">			imagePane.repaint();</span>
+<span class="nc" id="L233">		}</span>
+	}
+
+<span class="nc" id="L236">	private final class TestBufferFormatCallback implements BufferFormatCallback {</span>
+		@Override
+		public BufferFormat getBufferFormat(int sourceWidth, int sourceHeight) {
+<span class="nc" id="L239">			return new RV32BufferFormat(width, height);</span>
+		}
+	}
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.3.20130409-1102</span></div></body></html>
